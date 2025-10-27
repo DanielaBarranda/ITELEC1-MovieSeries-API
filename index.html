@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemax | Movie Details</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="logo">
+        <span class="logo-emoji">🎬</span>
+        Cinemax
+      </div>
+
+      <div class="nav-links">
+        <a href="#" class="active">Home</a>
+        <a href="#">Discover</a>
+        <a href="#">About</a>
+      </div>
+
+
+      <div class="search-container">
+        <button class="search-btn"><i class="fas fa-search"></i></button>
+        <input type="text" class="search-input" placeholder="Search movies..." />
+      </div>
+    </div>
+  </nav>
+
+  
+  <section class="page">
+    <div class="page-inner">
+
+      <button class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+
+      <div class="detail-grid">
+        <div class="poster-col">
+          <img src="https://via.placeholder.com/260x390?text=Movie+Poster" alt="Movie Poster">
+        </div>
+
+        <div class="content-col">
+          <div class="title-row">
+            <h1>No movie selected.</h1>
+            <p class="meta">Original title: N/A</p>
+            <p class="meta small">Year · Rating · Runtime</p>
+          </div>
+
+          <div class="trailer-wrapper">
+            <div class="trailer-card">
+              <div class="trailer-top-right"><i class="fas fa-ellipsis-h"></i></div>
+              <button class="play-btn"><i class="fas fa-play"></i></button>
+              <button class="fullscreen-btn"><i class="fas fa-expand"></i></button>
+            </div>
+          </div>
+
+          <div class="tags">
+            <span>Action</span><span>Adventure</span><span>Fantasy</span>
+          </div>
+
+          <div class="description">
+            <div class="desc-box">
+              <p>Movie description will appear here.</p>
+              <hr>
+              <p><strong>Director</strong><br>N/A</p>
+              <p><strong>Cast</strong><br>N/A</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
