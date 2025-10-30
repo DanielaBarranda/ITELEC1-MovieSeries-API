@@ -151,6 +151,13 @@ footer {
   line-height: 1.4;
   border-radius: 2px;
 }
+footer {
+  position: relative;
+  width: 100%;
+  z-index: 10;
+  margin-top: 63vh; /* small spacing from content */
+}
+
 
 /* Responsive adjustments */
 @media (max-width: 900px) {
