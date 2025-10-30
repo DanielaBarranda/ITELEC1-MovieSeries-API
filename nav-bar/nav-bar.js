@@ -9,6 +9,7 @@ fetch("/ITELEC1-MovieSeries-API")
   });
 
 /* Insert nyo to sa html nyo:
+
 <link rel="stylesheet" href="/ITELEC1-MovieSeries-API/nav-bar/nav-bar.css" />
 
 <!-- Navbar -->
