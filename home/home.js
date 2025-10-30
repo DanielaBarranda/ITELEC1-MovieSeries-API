@@ -282,6 +282,30 @@ async function getWeatherAndMood() {
     document.getElementById("weatherIcon").src =
       `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
+      // --- DYNAMIC BACKGROUND IMAGE BASED ON WEATHER ---
+const weatherContainer = document.getElementById("weatherContainer");
+let bgImage = "";
+
+if (condition.includes("rain")) {
+  bgImage = "url('../images/rainy.jpg')";
+} else if (condition.includes("cloud")) {
+  bgImage = "url('../images/cloudy.jpg')";
+} else if (condition.includes("clear")) {
+  bgImage = "url('../images/sunny.jpg')";
+} else if (condition.includes("snow")) {
+  bgImage = "url('../images/snow.jpg')";
+} else {
+  bgImage = "url('../images/default-bg.jpg')";
+}
+
+if (weatherContainer) {
+  weatherContainer.style.backgroundImage = bgImage;
+  weatherContainer.style.backgroundSize = "cover";
+  weatherContainer.style.backgroundPosition = "center";
+  weatherContainer.style.transition = "background-image 0.8s ease-in-out";
+}
+
+
     // RIGHT SIDE MOOD TEXT & GENRE
     let moodSuggestion = "";
     let genre = "";

@@ -85,29 +85,30 @@
           </div>
 
           <!-- RIGHT SIDE -->
-          <div class="weather-right">
-            <div class="weather-header">
-              <img id="weatherIcon" src="" alt="Weather Icon">
-              <p> It's </p>
-              <span id="weatherTemp">--°C</span>
-              <p> at </p>
-              <span id="weatherLocation">Loading...</span>
-            </div>
 
-            <p id="moodDescription" class="mood-text">Fetching mood...</p>
-            <p id="movieNameSuggestions" class="movie-suggestion-text"></p>
-          </div>
-        </div>
+          <div class="weather-right" id="weatherContainer">
+  <div class="weather-header">
+    <img id="weatherIcon" src="" alt="Weather Icon">
+    <p> It's </p>
+    <span id="weatherTemp">--°C</span>
+    <p> at </p>
+    <span id="weatherLocation">Loading...</span>
+  </div>
 
-        <div class="suggested-section">
-          <h3 class="suggested-title">Suggested Movies</h3>
-          <div class="movie-list" id="movie-list"></div>
-        </div>
+  <p id="moodDescription" class="mood-text">Fetching mood...</p>
+  <p id="movieNameSuggestions" class="movie-suggestion-text"></p>
+</div>
+</div>
 
-        <div class="see-more-container">
-          <button id="seeMoreBtn" class="see-more-btn">See more</button>
-        </div>
-      </section>
+<div class="suggested-section">
+  <h3 class="suggested-title">Suggested Movies</h3>
+  <div class="movie-list" id="movie-list"></div>
+</div>
+
+<div class="see-more-container">
+  <button id="seeMoreBtn" class="see-more-btn">See more</button>
+</div>
+</section>
 
     </section> <!-- End of dashboard -->
     
@@ -116,8 +117,6 @@
     <!-- ================= FOOTER (now at bottom of dashboard) ================= -->
     <div id="footer-placeholder"></div>
       
-
-
 
       <!-- Search Results Section (Hidden by Default) -->
       <section id="searchResultsSection" class="movies-section" style="display: none;">
