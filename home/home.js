@@ -107,3 +107,26 @@ document.getElementById("seeMoreBtn").onclick = () =>
 
 // Load at start
 getWeatherAndMood();
+
+// ================= MOVIE FACTS & TRIVIA =================
+async function getMovieFact() {
+  const factText = document.getElementById("movieFact");
+  factText.textContent = "Loading a fun fact... 🎥";
+
+  try {
+    const res = await fetch("https://uselessfacts.jsph.pl/random.json?language=en");
+    const data = await res.json();
+
+    // Clean and show fact
+    factText.textContent = data.text
+      ? data.text
+      : "No fact found — try again!";
+  } catch (error) {
+    console.error("Error fetching movie fact:", error);
+    factText.textContent = "Sorry, couldn’t fetch a movie fact right now.";
+  }
+}
+
+// Event listener
+document.getElementById("factBtn").addEventListener("click", getMovieFact);
+
