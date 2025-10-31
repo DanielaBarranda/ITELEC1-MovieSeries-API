@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemax | Movie Details</title>
+  <link rel="stylesheet" href="preview.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <section class="page">
+    <div class="page-inner">
+
+      <button class="back-btn" onclick="history.back()"><i class="fas fa-arrow-left"></i></button>
+
+      <div class="detail-grid">
+        <div class="poster-col">
+          <img id="poster" src="https://via.placeholder.com/260x390?text=Movie+Poster" alt="Movie Poster">
+        </div>
+
+        <div class="content-col">
+          <div class="title-row">
+            <h1 id="title">No movie selected.</h1>
+            <p class="meta" id="original-title">Original title: N/A</p>
+            <p class="meta small" id="meta">Year · Rating · Runtime</p>
+          </div>
+
+<div class="trailer-wrapper">
+  <div class="trailer-card">
+    <iframe 
+      id="trailer" 
+      width="560" 
+      height="315" 
+      frameborder="0" 
+      allowfullscreen
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture">
+    </iframe>
+
+    <div class="no-trailer">
+      <p>No trailer available for this movie.</p>
+    </div>
+  </div>
+</div>
+
+
+          <div class="tags" id="genre-tags"></div>
+
+          <div class="description">
+            <div class="desc-box">
+              <p id="plot">Movie description will appear here.</p>
+              <hr>
+              <p><strong>Director</strong><br><span id="director">N/A</span></p>
+              <p><strong>Cast</strong><br><span id="cast">N/A</span></p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="preview.js"></script>
+</body>
+</html>
