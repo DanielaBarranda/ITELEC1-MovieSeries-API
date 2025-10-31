@@ -548,6 +548,49 @@ body, html {
     justify-content: center;
   }
 }
+/* ===================== MOVIE FACTS & TRIVIA ===================== */
+.movie-facts-container {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 30px 40px;
+  margin: 50px auto;
+  max-width: 700px;
+  color: white;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.movie-facts-container h3 {
+  font-family: "SF Pro", sans-serif;
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+#movieFact {
+  font-family: "SF Medium", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: #ddd;
+  opacity: 0.9;
+}
+
+#factBtn {
+  padding: 12px 25px;
+  background: #1D3770;
+  border: none;
+  color: white;
+  font-family: "SF Medium", sans-serif;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+#factBtn:hover {
+  background: #0046f6;
+  transform: scale(1.05);
+}
+
 
 /* Mobile */
 @media (max-width: 600px) {
