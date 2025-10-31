@@ -1,5 +1,6 @@
-/*// Navbar ID
-fetch("/ITELEC1-MovieSeries-API")
+
+// Navbar ID
+/*fetch("/ITELEC1-MovieSeries-API")
   .then((response) => response.text())
   .then((data) => {
     document.getElementById("navbar-placeholder").innerHTML = data;
