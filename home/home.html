@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cinemax</title>
+
+  <link rel="stylesheet" href="../hnav-bar/nav-bar.css">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+  <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- ================= LANDING PAGE ================= -->
+    <section class="landing">
+      <div class="overlay"></div>
+
+      <div class="content">
+        <div class="Llogo-container">
+          <img src="../images/cinemax-logo.png" class="Llogo">
+          <h1 class="title">Cinemax</h1>
+        </div>
+        <p class="subtitle">Discover. Watch. Experience the story behind every film.</p>
+      </div>
+
+      <div class="arrow" id="scrollArrow">&#x25BC;</div>
+    </section>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../images/cinemax-logo.png">
+        <a href="#">Cinemax</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="../discover/discover.html">Discover</a></li>
+        <li><a href="../about/about.html">About</a></li>
+      </ul>
+
+  <div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search movies..." />
+    <button id="searchBtn"><i class="fas fa-search"></i></button>
+  </div>
+    </nav>
+
+    <!-- ================= DASHBOARD ================= -->
+    <section class="dashboard">
+
+      <!-- Cinemax Info Section -->
+      <div class="c-section">
+        <div class="c-left">
+          <div class="c-logo">
+            <img src="../images/cinemax-logo.png">
+            <h2>Cinemax</h2>
+          </div>
+          <p class="c-tagline">Discover. Watch. Experience the story behind every film.</p>
+        </div>
+
+        <div class="c-right">
+          <p>
+            Cinemax is your all-in-one destination for exploring movies! Discover a wide collection of films with complete details including synopsis, 
+            genre, cast, ratings, and official trailers to help you decide what to watch next. Whether you’re into action, romance, comedy, or thrillers, 
+            MCinemax+ lets you dive deeper into every movie — all in one simple and interactive platform.
+          </p>
+        </div>
+      </div>
+
+      <!-- ================= MOVIE MOOD WEATHER SECTION ================= -->
+      <section class="movie-mood-weather">
+          <div class="weather-container">
+
+            <!-- LEFT SIDE -->
+            <div class="weather-left">
+              <h2>🎬Movie Mood Weather</h2>
+              <p class="subtitle"> Forecast the Feels: Where Weather Meets Cinema</p>
+            <div class="refresh-container">
+              <button id="refreshMoodBtn">Refresh Mood</button>
+            </div>
+            
+          </div>
+
+            <!-- RIGHT SIDE -->
+            <div class="weather-right">
+              <div class="weather-header">
+                <img id="weatherIcon" src="" alt="Weather Icon">
+                <p> It's </p>
+                <span id="weatherTemp">--°C</span>
+                <p> at </p>
+                <span id="weatherLocation">Loading...</span>
+              </div>
+
+              <p id="moodDescription" class="mood-text">Fetching mood...</p>
+              <p id="movieNameSuggestions" class="movie-suggestion-text"></p>
+            </div>
+
+          </div>
+
+          <div class="suggested-section">
+            <h3 class="suggested-title">Suggested Movies</h3>
+            <div class="movie-list" id="movie-list"></div>
+          </div>
+
+          <div class="see-more-container">
+            <button id="seeMoreBtn" class="see-more-btn">See more</button>
+          </div>
+      </section>
+    </section>
+
+      <!-- <div id="footer-placeholder"></div>
+      <script>
+        // Load footer content
+        fetch('../footer/footer.html')
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById('footer-placeholder').innerHTML = data;
+          });
+      </script> -->
+  
+  </div>
+
+  <script src="../nav-bar/nav-bar.js"></script>
+  <script src="home.js"></script>
+
+</body>
+</html>
