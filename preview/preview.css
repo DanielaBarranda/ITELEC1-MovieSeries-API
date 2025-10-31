@@ -182,10 +182,10 @@ body {
 }
 
 .no-trailer {
-  display: none; /* hidden by default */
+  display: none; 
   justify-content: center;
   align-items: center;
-  height: 315px; /* match iframe height */
+  height: 315px;
 }
 
 .no-trailer p {
