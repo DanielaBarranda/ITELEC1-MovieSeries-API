@@ -155,4 +155,33 @@ nav a:hover {
 .favorite-btn.active {
   color: red;
 }
+/* === FINAL FIX: make overlay results grid wrap properly === */
+#overlayResults {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
+  gap: 1.5rem !important;
+  justify-items: center !important;
+  align-items: start !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#overlayResults .movie-card {
+  width: 180px;
+  background: #111827;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+#overlayResults .movie-card:hover {
+  transform: scale(1.05);
+}
+
+.search-overlay .results {
+  margin-top: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
 

@@ -90,3 +90,43 @@
 .search-container button:hover {
   background-color: #003be1;
 }
+/* --- Search Toggle Animation --- */
+.search-container {
+  position: absolute;
+  right: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.search-container input {
+  width: 0;
+  opacity: 0;
+  padding: 0.4rem 0.7rem;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  background-color: #1a1a1a;
+  color: white;
+  transition: width 0.4s ease, opacity 0.3s ease;
+}
+
+.search-container.active input {
+  width: 180px;
+  opacity: 1;
+}
+
+.search-container button {
+  background-color: #00268f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+  background-color: #003be1;
+}
