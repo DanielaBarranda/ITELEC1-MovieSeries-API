@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> origin/main
 // Navbar ID
 fetch("/ITELEC1-MovieSeries-API")
   .then((response) => response.text())

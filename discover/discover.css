@@ -1,0 +1,158 @@
+/* --- Global Styles --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #0d0f18, #0b0e18, #0b1224);
+  color: #fff;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  background: rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+nav a {
+  margin: 0 1rem;
+  text-decoration: none;
+  color: #ccc;
+  transition: 0.3s;
+}
+
+nav a.active,
+nav a:hover {
+  color: #fff;
+}
+
+.search {
+  cursor: pointer;
+}
+
+/* --- Layout --- */
+.container {
+  padding: 8rem 6rem;
+}
+
+/* --- Highlights Section --- */
+.highlight-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 5rem;
+  margin-bottom: 2rem;
+  margin-top: -4rem;
+}
+
+.year {
+  font-size: 20rem;
+  font-weight: 700;
+  color: #ffffff;
+  opacity: 0.5;
+  line-height: 0.8;
+  margin-top: -3rem;
+}
+
+.highlight h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 180px);
+  gap: 1.5rem;
+}
+
+.movie-card {
+  background: #111827;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 270px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 0.8rem;
+}
+
+.movie-info h3 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+.movie-info p {
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+/* --- Placeholder Cards --- */
+.movie-placeholder {
+  width: 180px;
+  height: 270px;
+  background: #0f1629;
+  border-radius: 10px;
+  opacity: 0.3;
+}
+
+/* --- Movie Sections --- */
+.movies-section {
+  margin-bottom: 3rem;
+}
+
+.movies-section h2 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 3rem;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.2);
+}
+
+.favorite-btn.active {
+  color: red;
+}
+
