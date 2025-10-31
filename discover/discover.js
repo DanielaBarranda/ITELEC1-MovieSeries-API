@@ -135,6 +135,7 @@ function displayMovies(movies) {
       </div>
     `;
     addFavoriteButton(movie, movieCard);
+    makeCardClickable(movieCard, movie);
     movieContainer.appendChild(movieCard);
   });
 }
@@ -176,6 +177,7 @@ function display2025Highlights(movies) {
       </div>
     `;
     addFavoriteButton(movie, card);
+    makeCardClickable(card, movie); 
     highlightGrid.appendChild(card);
   });
 }
@@ -219,6 +221,7 @@ function displayActionMovies(movies) {
       </div>
     `;
     addFavoriteButton(movie, card);
+    makeCardClickable(card, movie);
     actionContainer.appendChild(card);
   });
 }
@@ -255,6 +258,7 @@ function displayCartoonMovies(movies) {
       </div>
     `;
     addFavoriteButton(movie, card);
+    makeCardClickable(card, movie);
     cartoonContainer.appendChild(card);
   });
 }
@@ -264,7 +268,7 @@ fetch("https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US
   .then((data) => displayCartoonMovies(data.results))
   .catch((err) => console.error(err));
 
-// --- 🟦 SEARCH FUNCTION (Change entire screen) ---
+// --- SEARCH FUNCTION ---
 document.addEventListener("DOMContentLoaded", () => {
   const checkNavbar = setInterval(() => {
     const searchInput = document.getElementById("searchInput");
@@ -329,6 +333,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
               `;
               addFavoriteButton(movie, card);
+              makeCardClickable(card, movie);
               searchResultsContainer.appendChild(card);
             });
           })
@@ -357,3 +362,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 200);
 });
+
+// Para maclick yung cards
+function makeCardClickable(card, movie) {
+  card.addEventListener("click", (e) => {
+    if (e.target.classList.contains("favorite-btn")) return;
+    window.location.href = `../preview/preview.html?movieID=${movie.id}`;
+  });
+}
