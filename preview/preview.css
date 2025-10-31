@@ -180,3 +180,18 @@ body {
   background: rgba(255, 255, 255, 0.1);
   margin: clamp(12px, 1.8vw, 20px) 0;
 }
+
+.no-trailer p {
+  color: #b8b8c7;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.8;
+
+  position: absolute;
+  top: 38%;
+  left: 68%;
+  transform: translate(-50%, -50%);
+}
+
+
