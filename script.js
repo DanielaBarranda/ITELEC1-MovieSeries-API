@@ -1,5 +1,4 @@
-// Replace this with your actual OMDb API key (get it from https://www.omdbapi.com/apikey.aspx)
-const apiKey = "YOUR_OMDB_API_KEY";  
+const apiKey = "56a57cd";  
 
 const urlParams = new URLSearchParams(window.location.search);
 const movieId = urlParams.get("id"); // Example: ?id=tt1375666 (Inception)
