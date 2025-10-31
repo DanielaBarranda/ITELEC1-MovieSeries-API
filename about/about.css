@@ -1,0 +1,263 @@
+
+/* ===== About Page Styles ===== */
+
+body {
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500; /* Semi-Bold */
+  margin: 0;
+  padding: 0;
+}
+
+.about-section {
+  padding: 4rem 2rem;
+  background: url("../images/bg1.png") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  justify-content: flex-start; 
+  min-height: 100vh;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1100%;
+  width: 100%;
+  margin-right: 5%;
+  margin-left: 5%; /* shift content closer to left */
+}
+
+.about-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 4%;
+  margin-bottom: 5rem;
+}
+
+.about-logo-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-logo-header img {
+  width: 90px;
+  height: 90px;
+  margin-top: -30px;
+  object-fit: contain;
+}
+
+.about-logo-header h1 {
+  font-size: 6rem;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: #ffffff;
+}
+
+.about-logo .tagline {
+  font-size: 1.2rem;
+  color: #ccc;
+  margin: 0;
+  font-weight: 400;
+  padding-left: 0.5rem;
+}
+
+.about-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  text-align: right;
+  margin-left: auto;
+  max-width: 900px;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+  font-weight: 400;
+}
+
+.about-content h2 {
+  font-size: 3.5rem;
+  color: #ffffff;
+  margin-top: 7rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .about-logo img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .about-logo h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-logo .tagline {
+    font-size: 0.9rem;
+  }
+
+  .about-content {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .about-content h2 {
+    font-size: 1.8rem;
+  }
+}
+
+/*Behind-the-Curtains*/
+.team-section { 
+  width: 100vw; 
+  margin-bottom: 0%;
+  padding: 15rem 2rem;
+  background: linear-gradient(-180deg, #000000 0%, #0a213d 100%);
+  background-size: cover;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  box-sizing: border-box;
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b1623; /* match section bg just in case */
+  overflow-x: hidden; /* prevent horizontal scroll from 100vw */
+  font-family: 'SF Pro Display', sans-serif;
+  font-weight: 500;
+}
+
+.team-section h2 {
+  margin-left: 5%;
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.team-section h2 span {
+  color: #b3e0ff;
+}
+
+.team-description {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #ffffff;
+  max-width: 800px;
+  margin-left: 5%;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+/* Centered and responsive team layout */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 900fr));
+  gap: 5rem;
+  justify-items: center;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.team-card {
+  margin-top: 90%;
+  background-color: #00000085;
+  border-radius: 1rem;
+  padding: 2.5rem;
+  text-align: center;
+  width: 150px;
+  height: 220px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(3, 36, 105, 0.4);
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 auto 1rem auto;
+}
+
+.name {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.socials a {
+  color: white;
+  margin: 0 0.5rem;
+  font-size: 1.1rem;
+  transition: color 0.3s;
+}
+
+.socials a:hover {
+  color: #66c2ff;
+}
+
+/*Avatar pfp*/
+
+.team-card .avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 2px solid #66c2ff;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.team-card .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 🎞️ Moving Film Strip Background */
+.film-strip-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300%; /* Wider to ensure full seamless loop */
+  height: 100%;
+  background: 
+    url("../images/filmstrip.png") repeat-x, /* moving film layer */
+    url("../images/bg1.png") no-repeat center center fixed; /* your main background */
+  background-size: contain, cover; /* filmstrip scales properly, bg covers */
+  animation: moveFilm 30s linear infinite; /* smoother & slower movement */
+  opacity: 50; /* make it slightly more visible */
+  z-index: -1; /* keep it behind everything */
+}
+
+/* 🎥 Horizontal film scroll effect */
+@keyframes moveFilm {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Subtle dark overlay for better readability */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* darkens background */
+  z-index: -1;
+}

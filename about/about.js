@@ -1,7 +1,3 @@
-HEAD
-/*
->>>>>>> origin/main
-// Navbar ID
 fetch("/ITELEC1-MovieSeries-API")
   .then((response) => response.text())
   .then((data) => {
@@ -11,11 +7,4 @@ fetch("/ITELEC1-MovieSeries-API")
     console.error("Failed to load navbar:", error);
   });
 
-/* Insert nyo to sa html nyo:
-
-<link rel="stylesheet" href="/ITELEC1-MovieSeries-API/nav-bar/nav-bar.css" />
-
-<!-- Navbar -->
-  <div id="navbar-placeholder"></div>
-
-*/
+  
