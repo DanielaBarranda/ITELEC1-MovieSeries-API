@@ -25,9 +25,15 @@ const movieTrailer = document.getElementById("trailer");
 const movieOriginalTitle = document.getElementById("original-title");
 const genreTags = document.getElementById("genre-tags");
 
+// 👇 Add reference to the “No trailer available” div
+const noTrailer = document.querySelector(".no-trailer");
+
 if (movieID) {
   // Fetch movie details
-  fetch(`https://api.themoviedb.org/3/movie/${movieID}?language=en-US&append_to_response=videos,credits`, options)
+  fetch(
+    `https://api.themoviedb.org/3/movie/${movieID}?language=en-US&append_to_response=videos,credits`,
+    options
+  )
     .then((res) => res.json())
     .then((data) => {
       // Update content
@@ -36,9 +42,9 @@ if (movieID) {
       moviePoster.src = data.poster_path
         ? `${imageBaseURL}${data.poster_path}`
         : "https://via.placeholder.com/260x390?text=No+Poster";
-      movieMeta.textContent = `${data.release_date?.split("-")[0] || "N/A"} · ⭐ ${data.vote_average?.toFixed(1) || "N/A"} · ${
-        data.runtime || "N/A"
-      } mins`;
+      movieMeta.textContent = `${data.release_date?.split("-")[0] || "N/A"} · ⭐ ${
+        data.vote_average?.toFixed(1) || "N/A"
+      } · ${data.runtime || "N/A"} mins`;
       moviePlot.textContent = data.overview || "No description available.";
 
       // Director
@@ -49,12 +55,19 @@ if (movieID) {
       const castList = data.credits?.cast?.slice(0, 3).map((a) => a.name).join(", ");
       movieCast.textContent = castList || "N/A";
 
-      // Trailer
-      const trailer = data.videos?.results?.find((v) => v.type === "Trailer" && v.site === "YouTube");
+      // 🎬 Trailer
+      const trailer = data.videos?.results?.find(
+        (v) => v.type === "Trailer" && v.site === "YouTube"
+      );
+
       if (trailer) {
         movieTrailer.src = `https://www.youtube.com/embed/${trailer.key}`;
+        movieTrailer.style.display = "block"; // show iframe
+        if (noTrailer) noTrailer.style.display = "none"; // hide message
       } else {
         movieTrailer.src = "";
+        movieTrailer.style.display = "none"; // hide iframe
+        if (noTrailer) noTrailer.style.display = "flex"; // show message
       }
 
       // Genres (tags)
