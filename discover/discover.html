@@ -10,6 +10,8 @@
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 />
+<link rel="stylesheet" href="../footer/footer.css">
+
 </head>
 <body>
     
@@ -60,5 +62,18 @@
 
   <!-- Script -->
   <script src="../discover/discover.js"></script>
+
+  <!-- Footer placeholder -->
+<div id="footer-placeholder"></div>
+
+<script>
+  // Load Footer
+  fetch("../footer/footer.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("footer-placeholder").innerHTML = data;
+    });
+</script>
+
 </body>
 </html>
