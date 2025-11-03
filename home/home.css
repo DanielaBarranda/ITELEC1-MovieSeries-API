@@ -37,20 +37,19 @@ body, html {
 
 
 /* ===================== NAV BAR ===================== */
-/* Hide nav bar at start (landing page) */
+/* Navbar default (hidden on landing) */
 .navbar {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
 
-/* When landing slides up, show navbar */
-.landing.slide-up ~ .navbar {
+/* Navbar becomes visible after landing slides up */
+.navbar.visible {
   opacity: 1;
   pointer-events: auto;
-
-  transform: translateY(0);
 }
+
 
 /* ===================== LANDING PAGE ===================== */
 .landing {
@@ -111,7 +110,7 @@ body, html {
 
 .arrow {
   position: absolute;
-  bottom: 40px;
+  bottom: 80px;
   font-size: 2rem;
   color: white;
   cursor: pointer;
@@ -124,7 +123,9 @@ body, html {
   transform: translateY(-100px);
   opacity: 0;
 }
-
+.c-right .movie-facts-container {
+  margin-top: 30px;
+}
 
 /* ===================== DASHBOARD ===================== */
 .dashboard {
@@ -193,8 +194,34 @@ body, html {
   color: white;
 }
 
-.c-left, .c-right {
-  padding: 0 5%; 
+/* Add more space above the right-side text */
+.c-right {
+  padding-top: 80px; /* increased spacing from top */
+}
+
+/* Keep nice distance between text and Movie Fact box */
+.c-right p {
+  margin-bottom: 60px;
+}
+
+/* Give the movie fact box breathing room */
+.c-right .movie-facts-container {
+  margin-top: 40px !important;
+}
+
+/* Responsive tweak for smaller screens */
+@media (max-width: 768px) {
+  .c-right {
+    padding-top: 100px; /* slightly more space on mobile */
+  }
+
+  .c-right p {
+    margin-bottom: 80px;
+  }
+
+  .c-right .movie-facts-container {
+    margin-top: 60px !important;
+  }
 }
 
 
@@ -292,7 +319,7 @@ body, html {
 
   .c-left, .c-right {
     padding: 0;
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .c-logo h2 {
