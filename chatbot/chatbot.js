@@ -97,5 +97,4 @@ function handleOption(option) {
   }, 600);
 }
 
-// Initial display (only badge)
 chatbotContainer.style.display = "none";
