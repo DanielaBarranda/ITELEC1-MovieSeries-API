@@ -6,6 +6,7 @@
   <title>Cinemax</title>
   <link rel="stylesheet" href="../discover/discover.css">
    <link rel="stylesheet" href="style.css" />
+     <link rel="stylesheet" href="../chatbot/chatbot.css" />
    <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -57,17 +58,16 @@
       <div id="searchResultsContainer" class="movie-grid"></div>
     </section>
 
-
   </main>
+
+  <!-- Footer -->
+     <div id="footer-placeholder"></div>
 
   <!-- Script -->
   <script src="../discover/discover.js"></script>
 
-  <!-- Footer placeholder -->
-<div id="footer-placeholder"></div>
-
+  <!-- Load Footer -->
 <script>
-  // Load Footer
   fetch("../footer/footer.html")
     .then(res => res.text())
     .then(data => {
