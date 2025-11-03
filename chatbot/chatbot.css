@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Chatbot toggle button */
+#chatbot-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #1E293B;
+  color: #FFD369;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+#chatbot-toggle:hover {
+  background-color: #334155;
+  transform: scale(1.1);
+}
+
+/* Notification badge */
+#chatbot-badge {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: #FFD369;
+  color: #111827;
+  font-weight: bold;
+  font-size: 13px;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Chatbot container */
+#chatbot-container {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  background: #0F172A;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
+  border: 1px solid #1E293B;
+  z-index: 9999; /* Ensures chatbot always stays on top */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#chatbot-header {
+  background-color: #1E293B;
+  color: #FFD369;
+  padding: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+
+#chatbot-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background: #111827;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 12px;
+  max-width: 80%;
+  font-size: 14px;
+}
+
+.bot {
+  background: #1E293B;
+  color: #E2E8F0;
+  align-self: flex-start;
+}
+
+.user {
+  background: #FFD369;
+  color: #111827;
+  align-self: flex-end;
+}
+
+#chatbot-options {
+  padding: 10px;
+  border-top: 1px solid #1E293B;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  background-color: #0F172A;
+}
+
+.option {
+  background-color: #1E293B;
+  color: #FFD369;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.option:hover {
+  background-color: #334155;
+}
