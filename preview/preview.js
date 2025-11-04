@@ -37,7 +37,7 @@ if (movieID) {
   )
     .then((res) => res.json())
     .then((data) => {
-      // Ito yong update content
+      // Update content
       movieTitle.textContent = data.title || "No title available";
       movieOriginalTitle.textContent = `Original title: ${
         data.original_title || "N/A"
@@ -68,15 +68,15 @@ if (movieID) {
 
       if (trailer) {
         movieTrailer.src = `https://www.youtube.com/embed/${trailer.key}`;
-        movieTrailer.style.display = "block"; 
-        if (noTrailer) noTrailer.style.display = "none"; 
+        movieTrailer.style.display = "block";
+        if (noTrailer) noTrailer.style.display = "none";
       } else {
         movieTrailer.src = "";
-        movieTrailer.style.display = "none"; 
-        if (noTrailer) noTrailer.style.display = "flex"; 
+        movieTrailer.style.display = "none";
+        if (noTrailer) noTrailer.style.display = "flex";
       }
 
-      //  Genres (tags)
+      // Genres (tags)
       genreTags.innerHTML = "";
       if (data.genres?.length) {
         data.genres.forEach((genre) => {
@@ -86,44 +86,64 @@ if (movieID) {
         });
       }
 
-      //  Where to Watch (using TMDB)
-      fetch(
-        `https://api.themoviedb.org/3/movie/${movieID}/watch/providers`,
-        options
-      )
-        .then((res) => res.json())
-        .then((provData) => {
-          const providers =
-            provData.results?.PH?.flatrate ||
-            provData.results?.US?.flatrate ||
-            [];
+      // Where to Watch (using TMDB)
+    fetch(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers`, options)
+      .then((res) => res.json())
+      .then((provData) => {
+        const country = provData.results?.PH || provData.results?.US || null;
 
-          watchOptions.innerHTML = "";
+        watchOptions.innerHTML = "<h3>Available on:</h3>";
 
-          if (providers.length) {
-            providers.forEach((prov) => {
-              const div = document.createElement("div");
-              div.className = "provider";
-              div.innerHTML = `
-                <img src="https://image.tmdb.org/t/p/original${prov.logo_path}" 
-                     alt="${prov.provider_name}" 
-                     title="${prov.provider_name}">
-              `;
-              watchOptions.appendChild(div);
-            });
-          } else {
-            watchOptions.innerHTML =
-              "<p class='no-watch'>No streaming options available.</p>";
+        if (!country) {
+          watchOptions.innerHTML +=
+            "<p class='no-watch'>No streaming info available for your region.</p>";
+          return;
+        }
+
+        const allProviders = [
+          ...(country.flatrate || []),
+          ...(country.buy || []),
+          ...(country.rent || []),
+        ];
+
+        const unique = [];
+        const seen = new Set();
+
+        allProviders.forEach((prov) => {
+          if (!seen.has(prov.provider_id)) {
+            seen.add(prov.provider_id);
+            unique.push(prov);
           }
+        });
+
+        if (unique.length) {
+          const providersDiv = document.createElement("div");
+          providersDiv.className = "provider-section";
+
+          unique.forEach((prov) => {
+            const span = document.createElement("span");
+            span.className = "provider-badge";
+            span.textContent = prov.provider_name;
+            providersDiv.appendChild(span);
+          });
+
+          watchOptions.appendChild(providersDiv);
+        } else {
+          watchOptions.innerHTML +=
+            "<p class='no-watch'>No streaming options available.</p>";
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching watch providers:", err);
+        watchOptions.innerHTML =
+          "<p class='no-watch'>Unable to load streaming options.</p>";
+      });
+
         })
         .catch((err) => {
-          console.error("Error fetching watch providers:", err);
+          console.error("Error fetching movie details:", err);
+          movieTitle.textContent = "Failed to load movie details.";
         });
-    })
-    .catch((err) => {
-      console.error("Error fetching movie details:", err);
-      movieTitle.textContent = "Failed to load movie details.";
-    });
-} else {
-  movieTitle.textContent = "No movie selected.";
-}
+    } else {
+      movieTitle.textContent = "No movie selected.";
+    }
