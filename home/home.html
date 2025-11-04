@@ -20,47 +20,30 @@
   <!-- Chatbot -->
   <div id="chatbot-placeholder"></div>
 
-  <div class="container">
-
     <!-- ================= LANDING PAGE ================= -->
     <section class="landing">
-      <div class="overlay"></div>
+        <div class="overlay"></div>
 
-      <div class="content">
-        <div class="Llogo-container">
-          <img src="../images/cinemax-logo.png" class="Llogo">
-          <h1 class="title">Cinemax</h1>
+        <div class="content">
+          <div class="Llogo-container">
+            <img src="../images/cinemax-logo.png" class="Llogo">
+            <h1 class="title">Cinemax</h1>
+          </div>
+          <p class="subtitle">Discover. Watch. Experience the story behind every film.</p>
         </div>
-        <p class="subtitle">Discover. Watch. Experience the story behind every film.</p>
-      </div>
 
-      <div class="arrow" id="scrollArrow">&#x25BC;</div>
+        <div class="arrow" id="scrollArrow">&#x25BC;</div>
     </section>
 
-    <!-- ================= NAVBAR ================= -->
-    <nav class="navbar">
-      <div class="logo">
-        <img src="../images/cinemax-logo.png">
-        <a href="#">Cinemax</a>
-      </div>
-
-      <ul class="nav-links">
-        <li><a href="#" class="active">Home</a></li>
-        <li><a href="../discover/discover.html">Discover</a></li>
-        <li><a href="../about/about.html">About</a></li>
-      </ul>
-
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search movies..." />
-        <button id="searchBtn"><i class="fas fa-search"></i></button>
-      </div>
-    </nav>
-    
+  <div class="container">
     <!-- ================= DASHBOARD ================= -->
     <section class="dashboard">
 
       <!-- Cinemax Info Section -->
       <div class="c-section">
+          <!-- 🎞️ Moving film background -->
+          <div class="film-strip-bg"></div>
+
         <div class="c-left">
           <div class="c-logo">
             <img src="../images/cinemax-logo.png">
@@ -75,21 +58,19 @@
             genre, cast, ratings, and official trailers to help you decide what to watch next. Whether you’re into action, romance, comedy, or thrillers, 
             Cinemax lets you dive deeper into every movie — all in one simple and interactive platform.
           </p>
+
+          <div class="movie-facts-container">
+            <h3>🎬 Movie Fact of the Day</h3>
+            <p id="movieFact">Click below to reveal a random fact!</p>
+            <button id="factBtn">Get a Movie Fact</button>
+          </div>
+
         </div>
-      </div>
+      </div> 
 
-<!-- ================= MOVIE FACTS & TRIVIA SECTION ================= -->
-<div class="movie-facts-container">
-  <h3>🎬 Movie Fact of the Day</h3>
-  <p id="movieFact">Click below to reveal a random fact!</p>
-  <button id="factBtn">Get a Movie Fact</button>
-</div>
+    <!-- ================= MOVIE FACTS & TRIVIA SECTION ================= -->
 
-
-
-
-
-      <!-- ================= MOVIE MOOD WEATHER SECTION ================= -->
+    <!-- ================= MOVIE MOOD WEATHER SECTION =================== -->
       <section class="movie-mood-weather">
         <div class="weather-container">
           <!-- LEFT SIDE -->
@@ -126,42 +107,74 @@
         </div>
       </section>
 
-      <!-- ================= FOOTER (now at bottom of dashboard) ================= -->
-      <div id="footer-placeholder"></div>
-
     </section> <!-- End of dashboard -->
-  </div> <!-- End of container -->
+    
+    </div> <!-- End of container -->
+
+    <!-- ================= FOOTER (now at bottom of dashboard) ================= -->
+    <div id="footer-placeholder"></div>
+      
 
 
-  <script>
-    fetch("../footer/footer.html")
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById("footer-placeholder").innerHTML = data;
-      })
-      .catch(error => console.error("Error loading footer:", error));
-  </script>
+
+      <!-- Search Results Section (Hidden by Default) -->
+      <section id="searchResultsSection" class="movies-section" style="display: none;">
+        <h2>Search Results</h2>
+        <div id="searchResultsContainer" class="movie-grid"></div>
+      </section>
+
+      <script>
+        fetch("../footer/footer.html")
+          .then(response => response.text())
+          .then(data => {
+            document.getElementById("footer-placeholder").innerHTML = data;
+          })
+          .catch(error => console.error("Error loading footer:", error));
+      </script>
 
 
-<!-- Chatbot -->
-     <script src="../chatbot/chatbot.js"></script>
+      <!-- Chatbot -->
+      <script src="../chatbot/chatbot.js"></script>
 
-  <script src="../nav-bar/nav-bar.js"></script>
-  <script src="home.js"></script>
+      <script src="../home/home.js"></script>
 
-  <script>
-  // Lock scroll on page load
-  document.body.style.overflow = "hidden";
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const scrollArrow = document.getElementById("scrollArrow");
+        const landing = document.querySelector(".landing");
+        const dashboard = document.querySelector(".dashboard");
 
-  // When the arrow is clicked, enable scrolling and scroll to dashboard
-  const scrollArrow = document.getElementById("scrollArrow");
-  scrollArrow.addEventListener("click", () => {
-    document.body.style.overflow = "auto";
-    document.querySelector(".dashboard").scrollIntoView({
-      behavior: "smooth"
-    });
-  });
-</script>
+        // Wait until navbar loads
+        const navbarCheck = setInterval(() => {
+          const navbar = document.querySelector(".navbar");
+          if (navbar) {
+            clearInterval(navbarCheck);
+
+            scrollArrow.addEventListener("click", () => {
+              // Animate landing page upward
+              landing.classList.add("slide-up");
+              scrollArrow.classList.add("slide-away");
+
+              // Animate navbar downward into view
+              setTimeout(() => {
+                navbar.classList.add("navbar-down");
+              }, 400);
+
+              // Show dashboard smoothly after navbar transition
+              setTimeout(() => {
+                dashboard.classList.add("show-dashboard");
+              }, 700);
+            });
+          }
+        }, 200);
+      });
+      </script>
+
+      <script>
+        window.addEventListener("scroll", () => {
+          document.body.classList.toggle("scrolled", window.scrollY > 20);
+        });
+      </script>
 
 </body>
 </html>
