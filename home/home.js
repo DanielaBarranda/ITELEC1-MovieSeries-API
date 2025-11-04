@@ -1,17 +1,7 @@
-// ==================== NAVBAR (SAME AS DISCOVER) ====================
-fetch("../nav-bar/nav.html")
-  .then(response => response.text())
-  .then(data => {
-    document.getElementById("navbar-placeholder").innerHTML = data;
-  })
-  .catch(error => console.error("Failed to load navbar:", error));
-
-
 // ==================== SEARCH OVERLAY FUNCTIONALITY ====================
 
 // --- TMDB token (same as discover.js) ---
-const token =
-  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
+const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
 
 const options = {
   method: "GET",
@@ -214,7 +204,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-// ==================== LANDING SCROLL ANIMATION ====================
+// ==================== NAVBAR (SAME AS DISCOVER) ====================
+fetch("../nav-bar/nav.html")
+  .then(response => response.text())
+  .then(data => {
+    document.getElementById("navbar-placeholder").innerHTML = data;
+  })
+  .catch(error => console.error("Failed to load navbar:", error));
+
+// ==================== LANDING SCROLL ANIMATION =====================
 const arrow = document.getElementById("scrollArrow");
 const landing = document.querySelector(".landing");
 
@@ -222,7 +220,8 @@ arrow.addEventListener("click", () => {
   landing.classList.add("slide-up");
   arrow.classList.add("slide-away");
 });
-// ================= SHOW NAVBAR AFTER LANDING =================
+
+// ================= SHOW NAVBAR AFTER LANDING =======================
 const navbarCheck = setInterval(() => {
   const navbar = document.querySelector(".navbar");
   if (navbar) {
@@ -246,6 +245,7 @@ const navbarCheck = setInterval(() => {
     });
   }
 }, 200);
+
 
 
 // ==================== WEATHER + MOVIE MOOD ====================
@@ -338,6 +338,9 @@ document.getElementById("seeMoreBtn").onclick = () =>
   (window.location.href = "../discover/discover.html");
 
 getWeatherAndMood();
+
+
+
 
 
 // ==================== MOVIE FACTS ====================

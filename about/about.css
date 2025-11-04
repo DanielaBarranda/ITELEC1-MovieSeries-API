@@ -10,7 +10,7 @@ body {
 
 .about-section {
   padding: 4rem 2rem;
-  background: url("../images/bg1.png") no-repeat center center fixed;
+  /* background: url("../images/bg1.png") no-repeat center center fixed; */
   background-size: cover;
   color: white;
   display: flex;
@@ -236,7 +236,7 @@ body {
   height: 100%;
   background: 
     url("../images/filmstrip.png") repeat-x, /* moving film layer */
-    url("../images/bg1.png") no-repeat center center fixed; /* your main background */
+    url("../images/bg1.png") no-repeat center center fixed;
   background-size: contain, cover; /* filmstrip scales properly, bg covers */
   animation: moveFilm 30s linear infinite; /* smoother & slower movement */
   opacity: 50; /* make it slightly more visible */
