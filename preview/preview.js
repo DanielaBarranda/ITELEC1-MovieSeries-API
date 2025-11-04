@@ -24,9 +24,10 @@ const movieCast = document.getElementById("cast");
 const movieTrailer = document.getElementById("trailer");
 const movieOriginalTitle = document.getElementById("original-title");
 const genreTags = document.getElementById("genre-tags");
-
-// 👇 Add reference to the “No trailer available” div
 const noTrailer = document.querySelector(".no-trailer");
+
+// reference for "Where to Watch"
+const watchOptions = document.getElementById("watch-options");
 
 if (movieID) {
   // Fetch movie details
@@ -36,9 +37,11 @@ if (movieID) {
   )
     .then((res) => res.json())
     .then((data) => {
-      // Update content
+      // Ito yong update content
       movieTitle.textContent = data.title || "No title available";
-      movieOriginalTitle.textContent = `Original title: ${data.original_title || "N/A"}`;
+      movieOriginalTitle.textContent = `Original title: ${
+        data.original_title || "N/A"
+      }`;
       moviePoster.src = data.poster_path
         ? `${imageBaseURL}${data.poster_path}`
         : "https://via.placeholder.com/260x390?text=No+Poster";
@@ -52,25 +55,28 @@ if (movieID) {
       movieDirector.textContent = director ? director.name : "N/A";
 
       // Cast
-      const castList = data.credits?.cast?.slice(0, 3).map((a) => a.name).join(", ");
+      const castList = data.credits?.cast
+        ?.slice(0, 3)
+        .map((a) => a.name)
+        .join(", ");
       movieCast.textContent = castList || "N/A";
 
-      // 🎬 Trailer
+      // Trailer
       const trailer = data.videos?.results?.find(
         (v) => v.type === "Trailer" && v.site === "YouTube"
       );
 
       if (trailer) {
         movieTrailer.src = `https://www.youtube.com/embed/${trailer.key}`;
-        movieTrailer.style.display = "block"; // show iframe
-        if (noTrailer) noTrailer.style.display = "none"; // hide message
+        movieTrailer.style.display = "block"; 
+        if (noTrailer) noTrailer.style.display = "none"; 
       } else {
         movieTrailer.src = "";
-        movieTrailer.style.display = "none"; // hide iframe
-        if (noTrailer) noTrailer.style.display = "flex"; // show message
+        movieTrailer.style.display = "none"; 
+        if (noTrailer) noTrailer.style.display = "flex"; 
       }
 
-      // Genres (tags)
+      //  Genres (tags)
       genreTags.innerHTML = "";
       if (data.genres?.length) {
         data.genres.forEach((genre) => {
@@ -79,6 +85,40 @@ if (movieID) {
           genreTags.appendChild(tag);
         });
       }
+
+      //  Where to Watch (using TMDB)
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieID}/watch/providers`,
+        options
+      )
+        .then((res) => res.json())
+        .then((provData) => {
+          const providers =
+            provData.results?.PH?.flatrate ||
+            provData.results?.US?.flatrate ||
+            [];
+
+          watchOptions.innerHTML = "";
+
+          if (providers.length) {
+            providers.forEach((prov) => {
+              const div = document.createElement("div");
+              div.className = "provider";
+              div.innerHTML = `
+                <img src="https://image.tmdb.org/t/p/original${prov.logo_path}" 
+                     alt="${prov.provider_name}" 
+                     title="${prov.provider_name}">
+              `;
+              watchOptions.appendChild(div);
+            });
+          } else {
+            watchOptions.innerHTML =
+              "<p class='no-watch'>No streaming options available.</p>";
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching watch providers:", err);
+        });
     })
     .catch((err) => {
       console.error("Error fetching movie details:", err);
