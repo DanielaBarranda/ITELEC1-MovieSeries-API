@@ -5,19 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cinemax</title>
 
+  <link rel="stylesheet" href="../hnav-bar/nav-bar.css">
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
   />
-  <link rel="stylesheet" href="../home/home.css">
+  <link rel="stylesheet" href="home.css">
   <link rel="stylesheet" href="../footer/footer.css">
      <link rel="stylesheet" href="../chatbot/chatbot.css" />
 </head>
 
 <body>
-
-  <!-- Navbar -->
-  <div id="navbar-placeholder"></div>
 
   <!-- Chatbot -->
   <div id="chatbot-placeholder"></div>
@@ -39,7 +37,24 @@
       <div class="arrow" id="scrollArrow">&#x25BC;</div>
     </section>
 
-    
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar">
+      <div class="logo">
+        <img src="../images/cinemax-logo.png">
+        <a href="#">Cinemax</a>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="../discover/discover.html">Discover</a></li>
+        <li><a href="../about/about.html">About</a></li>
+      </ul>
+
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search movies..." />
+        <button id="searchBtn"><i class="fas fa-search"></i></button>
+      </div>
+    </nav>
     
     <!-- ================= DASHBOARD ================= -->
     <section class="dashboard">
@@ -54,24 +69,21 @@
           <p class="c-tagline">Discover. Watch. Experience the story behind every film.</p>
         </div>
 
-<div class="c-right">
-  <p>
-    Cinemax is your all-in-one destination for exploring movies! Discover a wide collection of films with complete details including synopsis, 
-    genre, cast, ratings, and official trailers to help you decide what to watch next. Whether you’re into action, romance, comedy, or thrillers, 
-    Cinemax lets you dive deeper into every movie — all in one simple and interactive platform.
-  </p>
+        <div class="c-right">
+          <p>
+            Cinemax is your all-in-one destination for exploring movies! Discover a wide collection of films with complete details including synopsis, 
+            genre, cast, ratings, and official trailers to help you decide what to watch next. Whether you’re into action, romance, comedy, or thrillers, 
+            Cinemax lets you dive deeper into every movie — all in one simple and interactive platform.
+          </p>
+        </div>
+      </div>
 
-  <div class="movie-facts-container">
+<!-- ================= MOVIE FACTS & TRIVIA SECTION ================= -->
+<div class="movie-facts-container">
   <h3>🎬 Movie Fact of the Day</h3>
   <p id="movieFact">Click below to reveal a random fact!</p>
   <button id="factBtn">Get a Movie Fact</button>
 </div>
-</div>
-</div> <!-- 👈 closes .c-section -->
-
-<!-- ================= MOVIE FACTS & TRIVIA SECTION ================= -->
-
-
 
 
 
@@ -120,11 +132,6 @@
     </section> <!-- End of dashboard -->
   </div> <!-- End of container -->
 
-    <!-- Search Results Section (Hidden by Default) -->
-    <section id="searchResultsSection" class="movies-section" style="display: none;">
-      <h2>Search Results</h2>
-      <div id="searchResultsContainer" class="movie-grid"></div>
-    </section>
 
   <script>
     fetch("../footer/footer.html")
@@ -137,9 +144,10 @@
 
 
 <!-- Chatbot -->
-     <script src="../home/home.js"></script>
      <script src="../chatbot/chatbot.js"></script>
 
+  <script src="../nav-bar/nav-bar.js"></script>
+  <script src="home.js"></script>
 
   <script>
   // Lock scroll on page load
