@@ -1,5 +1,3 @@
-// discover.js (final full version)
-
 // --- Load navbar (unchanged) ---
 fetch("../nav-bar/nav.html")
   .then((response) => response.text())
@@ -101,6 +99,9 @@ function addFavoriteButton(movie, container) {
       heart.textContent = "❤️";
     }
     updateFavorites();
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
   });
 
   container.appendChild(heart);
@@ -134,6 +135,12 @@ function createMovieCard(movie) {
   makeCardClickable(card, movie);
   return card;
 }
+
+window.addEventListener("DOMContentLoaded", () => {
+  favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+  updateFavorites();
+});
+
 
 // --- Display Functions ---
 function displayMovies(movies) {
