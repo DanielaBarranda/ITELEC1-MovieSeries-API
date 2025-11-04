@@ -69,6 +69,8 @@ function updateFavorites() {
         <p>${releaseDate} • ⭐ ${movie.vote_average.toFixed(1)}</p>
       </div>
     `;
+
+    makeCardClickable(card, movie);
     favoritesContainer.appendChild(card);
   });
 }
