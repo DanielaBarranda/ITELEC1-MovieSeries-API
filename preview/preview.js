@@ -24,9 +24,10 @@ const movieCast = document.getElementById("cast");
 const movieTrailer = document.getElementById("trailer");
 const movieOriginalTitle = document.getElementById("original-title");
 const genreTags = document.getElementById("genre-tags");
-
-// 👇 Add reference to the “No trailer available” div
 const noTrailer = document.querySelector(".no-trailer");
+
+// reference for "Where to Watch"
+const watchOptions = document.getElementById("watch-options");
 
 if (movieID) {
   // Fetch movie details
@@ -38,7 +39,9 @@ if (movieID) {
     .then((data) => {
       // Update content
       movieTitle.textContent = data.title || "No title available";
-      movieOriginalTitle.textContent = `Original title: ${data.original_title || "N/A"}`;
+      movieOriginalTitle.textContent = `Original title: ${
+        data.original_title || "N/A"
+      }`;
       moviePoster.src = data.poster_path
         ? `${imageBaseURL}${data.poster_path}`
         : "https://via.placeholder.com/260x390?text=No+Poster";
@@ -52,22 +55,25 @@ if (movieID) {
       movieDirector.textContent = director ? director.name : "N/A";
 
       // Cast
-      const castList = data.credits?.cast?.slice(0, 3).map((a) => a.name).join(", ");
+      const castList = data.credits?.cast
+        ?.slice(0, 3)
+        .map((a) => a.name)
+        .join(", ");
       movieCast.textContent = castList || "N/A";
 
-      // 🎬 Trailer
+      // Trailer
       const trailer = data.videos?.results?.find(
         (v) => v.type === "Trailer" && v.site === "YouTube"
       );
 
       if (trailer) {
         movieTrailer.src = `https://www.youtube.com/embed/${trailer.key}`;
-        movieTrailer.style.display = "block"; // show iframe
-        if (noTrailer) noTrailer.style.display = "none"; // hide message
+        movieTrailer.style.display = "block";
+        if (noTrailer) noTrailer.style.display = "none";
       } else {
         movieTrailer.src = "";
-        movieTrailer.style.display = "none"; // hide iframe
-        if (noTrailer) noTrailer.style.display = "flex"; // show message
+        movieTrailer.style.display = "none";
+        if (noTrailer) noTrailer.style.display = "flex";
       }
 
       // Genres (tags)
@@ -79,11 +85,65 @@ if (movieID) {
           genreTags.appendChild(tag);
         });
       }
-    })
-    .catch((err) => {
-      console.error("Error fetching movie details:", err);
-      movieTitle.textContent = "Failed to load movie details.";
-    });
-} else {
-  movieTitle.textContent = "No movie selected.";
-}
+
+      // Where to Watch (using TMDB)
+    fetch(`https://api.themoviedb.org/3/movie/${movieID}/watch/providers`, options)
+      .then((res) => res.json())
+      .then((provData) => {
+        const country = provData.results?.PH || provData.results?.US || null;
+
+        watchOptions.innerHTML = "<h3>Available on:</h3>";
+
+        if (!country) {
+          watchOptions.innerHTML +=
+            "<p class='no-watch'>No streaming info available for your region.</p>";
+          return;
+        }
+
+        const allProviders = [
+          ...(country.flatrate || []),
+          ...(country.buy || []),
+          ...(country.rent || []),
+        ];
+
+        const unique = [];
+        const seen = new Set();
+
+        allProviders.forEach((prov) => {
+          if (!seen.has(prov.provider_id)) {
+            seen.add(prov.provider_id);
+            unique.push(prov);
+          }
+        });
+
+        if (unique.length) {
+          const providersDiv = document.createElement("div");
+          providersDiv.className = "provider-section";
+
+          unique.forEach((prov) => {
+            const span = document.createElement("span");
+            span.className = "provider-badge";
+            span.textContent = prov.provider_name;
+            providersDiv.appendChild(span);
+          });
+
+          watchOptions.appendChild(providersDiv);
+        } else {
+          watchOptions.innerHTML +=
+            "<p class='no-watch'>No streaming options available.</p>";
+        }
+      })
+      .catch((err) => {
+        console.error("Error fetching watch providers:", err);
+        watchOptions.innerHTML =
+          "<p class='no-watch'>Unable to load streaming options.</p>";
+      });
+
+        })
+        .catch((err) => {
+          console.error("Error fetching movie details:", err);
+          movieTitle.textContent = "Failed to load movie details.";
+        });
+    } else {
+      movieTitle.textContent = "No movie selected.";
+    }

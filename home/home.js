@@ -250,19 +250,19 @@ const navbarCheck = setInterval(() => {
 
 // ==================== WEATHER + MOVIE MOOD ====================
 const WEATHER_API_KEY = "3e5a7eb1fa9e9597753931bac70bc76f";
-const TMDB_JWT = token; // reuse same token
+const TMDB_JWT = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
 
+// TMDB Genre Map
 const GENRES = {
   romance: "10749",
   adventure: "12",
   drama: "18",
   comedy: "35",
-  popular: "28",
+  popular: "28" 
 };
 
-// same weather and mood functions (keep your existing code)
 async function getWeatherAndMood() {
-  navigator.geolocation.getCurrentPosition(async (position) => {
+  navigator.geolocation.getCurrentPosition(async position => {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
 
@@ -276,10 +276,13 @@ async function getWeatherAndMood() {
     const icon = weather.weather[0].icon;
     const city = weather.name;
 
+    // LEFT SIDE DETAILS
     document.getElementById("weatherTemp").textContent = `${temp}°C`;
     document.getElementById("weatherLocation").textContent = city;
-    document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${icon}@2x.png`;
+    document.getElementById("weatherIcon").src =
+      `https://openweathermap.org/img/wn/${icon}@2x.png`;
 
+    // RIGHT SIDE MOOD TEXT & GENRE
     let moodSuggestion = "";
     let genre = "";
 
@@ -304,6 +307,7 @@ async function getWeatherAndMood() {
     }
 
     document.getElementById("moodDescription").textContent = moodSuggestion;
+
     fetchMovies(GENRES[genre]);
   });
 }
@@ -313,30 +317,36 @@ async function fetchMovies(genreId) {
     `https://api.themoviedb.org/3/discover/movie?include_adult=false&sort_by=popularity.desc&with_genres=${genreId}`,
     { headers: { Authorization: `Bearer ${TMDB_JWT}` } }
   );
+
   const data = await res.json();
   const list = data.results.slice(0, 7);
+
+  // ==== DISPLAY POSTERS ====
   const movieListContainer = document.getElementById("movie-list");
   movieListContainer.innerHTML = list
-    .map(
-      (movie) => `
+    .map(movie => `
       <div class="movie-card">
         <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
         <p>${movie.title}</p>
-      </div>`
-    )
+      </div>
+    `)
     .join("");
 
-  if (list.length >= 3) {
-    document.getElementById("movieNameSuggestions").innerHTML = `
-      Try <b>${list[0].title}</b>, <b>${list[1].title}</b>, or <b>${list[2].title}</b> today. </br>
-      See more in our suggested movies below!`;
+  // ==== TEXT SUGGESTION (1-2 movie names) ====
+  if (list.length >= 2) {
+    document.getElementById("movieNameSuggestions").innerHTML =
+      `Try <b>${list[0].title}</b>, <b>${list[1].title}</b>, or <b>${list[2].title}</b> today. </br> See more in our suggested movies below!`;
   }
 }
 
+// Refresh button
 document.getElementById("refreshMoodBtn").onclick = getWeatherAndMood;
-document.getElementById("seeMoreBtn").onclick = () =>
-  (window.location.href = "../discover/discover.html");
 
+// "See More" button → Discover
+document.getElementById("seeMoreBtn").onclick = () =>
+  window.location.href = "../discover/discover.html";
+
+// Load at start
 getWeatherAndMood();
 
 
@@ -347,14 +357,21 @@ getWeatherAndMood();
 async function getMovieFact() {
   const factText = document.getElementById("movieFact");
   factText.textContent = "Loading a fun fact... 🎥";
+
   try {
     const res = await fetch("https://uselessfacts.jsph.pl/random.json?language=en");
     const data = await res.json();
-    factText.textContent = data.text || "No fact found — try again!";
+
+    // Clean and show fact
+    factText.textContent = data.text
+      ? data.text
+      : "No fact found — try again!";
   } catch (error) {
     console.error("Error fetching movie fact:", error);
     factText.textContent = "Sorry, couldn’t fetch a movie fact right now.";
   }
 }
 
+// Event listener
 document.getElementById("factBtn").addEventListener("click", getMovieFact);
+

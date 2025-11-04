@@ -46,19 +46,20 @@ body {
 
 
 /* ===================== NAV BAR ===================== */
-/* Navbar default (hidden on landing) */
+/* Hide nav bar at start (landing page) */
 .navbar {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.6s ease;
 }
 
-/* Navbar becomes visible after landing slides up */
-.navbar.visible {
+/* When landing slides up, show navbar */
+.landing.slide-up ~ .navbar {
   opacity: 1;
   pointer-events: auto;
-}
 
+  transform: translateY(0);
+}
 
 /* ===================== LANDING PAGE ===================== */
 .landing {
@@ -119,7 +120,7 @@ body {
 
 .arrow {
   position: absolute;
-  bottom: 80px;
+  bottom: 40px;
   font-size: 2rem;
   color: white;
   cursor: pointer;
@@ -398,7 +399,7 @@ body {
 
   .c-left, .c-right {
     padding: 0;
-    max-width: 100%;
+    max-width: 90%;
   }
 
   .c-logo h2 {

@@ -137,20 +137,70 @@ body {
   display: block;
 }
 
-/* === TAGS === */
-.tags {
-  margin-top: 16px;
+/* === TAGS CONTAINER (Genres + Watch Options) === */
+.tags-container {
   display: flex;
-  gap: clamp(6px, 1vw, 12px);
+  align-items: center;
   flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
 }
-.tags span {
-  background: rgba(255, 255, 255, 0.02);
-  padding: clamp(4px, 0.6vw, 8px) clamp(10px, 1vw, 14px);
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #d6d6df;
-  font-size: clamp(11px, 1vw, 13px);
+
+/* Genres */
+#genre-tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+#genre-tags span {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  padding: 5px 10px;
+  transition: 0.2s ease;
+}
+
+#genre-tags span:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Watch Options */
+#watch-options {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0; 
+}
+
+#watch-options h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #ccc;
+  margin: 0; 
+}
+
+.provider-section {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.provider-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  padding: 5px 10px;
+  transition: 0.2s ease;
+}
+
+.provider-badge:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 /* === DESCRIPTION BOX === */
@@ -195,5 +245,3 @@ body {
   text-align: center;
   opacity: 0.8;
 }
-
-
