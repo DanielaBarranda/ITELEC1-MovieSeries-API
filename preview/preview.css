@@ -137,13 +137,23 @@ body {
   display: block;
 }
 
-/* === TAGS === */
-.tags {
+/* === TAGS CONTAINER (Genres + Watch Options) === */
+.tags-container {
   margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 12px);
+}
+
+/* === GENRE TAGS === */
+.tags {
   display: flex;
   gap: clamp(6px, 1vw, 12px);
   flex-wrap: wrap;
 }
+
 .tags span {
   background: rgba(255, 255, 255, 0.02);
   padding: clamp(4px, 0.6vw, 8px) clamp(10px, 1vw, 14px);
@@ -151,6 +161,46 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #d6d6df;
   font-size: clamp(11px, 1vw, 13px);
+}
+
+/* === WHERE TO WATCH SECTION === */
+.watch-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1vw, 12px);
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Logo images */
+.watch-options img {
+  width: 40px;             
+  height: 40px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #1a1a2a;     
+  padding: 5px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.watch-options img:hover {
+  transform: scale(1.1);
+  background: #2a2a3d;
+}
+
+.watch-options span {
+  background: rgba(255, 255, 255, 0.05);
+  padding: clamp(4px, 0.6vw, 8px) clamp(10px, 1vw, 14px);
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  font-size: clamp(11px, 1vw, 13px);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.watch-options span:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 /* === DESCRIPTION BOX === */
@@ -195,5 +245,3 @@ body {
   text-align: center;
   opacity: 0.8;
 }
-
-
