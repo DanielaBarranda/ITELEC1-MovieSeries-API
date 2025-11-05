@@ -56,7 +56,7 @@ nav a:hover {
   display: flex;
   align-items: flex-start;
   gap: 5rem;
-  margin-bottom: 2rem;
+  margin-bottom: -2rem;
   margin-top: -4rem;
 }
 
