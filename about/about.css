@@ -10,7 +10,8 @@ body {
 
 .about-section {
   padding: 4rem 2rem;
-  /* background: url("../images/bg1.png") no-repeat center center fixed; */
+ background: url("../images/aboutbg.jpg") no-repeat center center fixed; 
+ opacity: 75%;
   background-size: cover;
   color: white;
   display: flex;
