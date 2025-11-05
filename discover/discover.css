@@ -13,129 +13,208 @@ body {
   padding-bottom: 40px;
 }
 
-/* --- Navbar --- */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.5rem 3rem;
-  background: rgba(0, 0, 0, 0.3);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-
-.logo {
-  font-size: 1.3rem;
-  font-weight: 600;
-}
-
-nav a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #ccc;
-  transition: 0.3s;
-}
-
-nav a.active,
-nav a:hover {
-  color: #fff;
-}
-
-.search {
-  cursor: pointer;
-}
-
 /* --- Layout --- */
+/* Constrain content for very large screens and allow auto margins */
 .container {
-  padding: 8rem 6rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 3rem 2rem;
 }
 
 /* --- Highlights Section --- */
 .highlight-section {
   display: flex;
-  align-items: flex-start;
-  gap: 5rem;
-  margin-bottom: 2rem;
-  margin-top: -4rem;
+  align-items: center;          
+  gap: 4rem;
+  margin-bottom: 1rem;
+  margin-top: 0rem;
+  position: relative;
+  flex-wrap: nowrap;           
 }
 
 .year {
-  font-size: 20rem;
+  font-size: clamp(6rem, 15vw, 18rem);
   font-weight: 700;
   color: #ffffff;
   opacity: 0.5;
-  line-height: 0.8;
-  margin-top: -3rem;
+  line-height: 0.9;
+  flex-shrink: 0;               
+  text-align: left;
+  margin-left: 1rem;
 }
+
+/* --- HIGHLIGHT SECTION --- */
+.highlight-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2.5rem;
+  margin-bottom: 2rem;
+  margin-top: 0;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+
+.year {
+  font-size: clamp(6rem, 10vw, 18rem);
+  font-weight: 700;
+  color: #ffffff;
+  opacity: 0.7;
+  line-height: 0.9;
+  flex-shrink: 0;
+  text-align: left;
+  margin-left: 1rem;
+}
+
+
+.highlight {
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+}
+
 
 .highlight h2 {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .highlight-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 180px);
-  gap: 1.5rem;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 1.5rem;
+  -webkit-overflow-scrolling: touch;
 }
 
-.movie-card {
-  background: #111827;
+.highlight-grid::-webkit-scrollbar {
+  height: 7px;
+}
+.highlight-grid::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+/* Highlight cards */
+.highlight-grid .movie-card {
+  flex: 0 0 clamp(150px, 18vw, 200px);
+ 
+  background: linear-gradient(180deg, #111827 0%, #111827 100%);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+
   border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.3s;
+  transition: transform 0.3s ease;
 }
 
-.movie-card:hover {
+.highlight-grid .movie-card:hover {
   transform: scale(1.05);
 }
 
+/* Placeholder */
+.movie-placeholder {
+  width: 100%;
+  height: 270px;
+  background: #0f1629;
+  border-radius: 10px;
+  opacity: 0.1;
+}
+
+/* --- Movie Sections --- */
+.movies-section {
+  margin-bottom: 4rem;
+  padding: 0;              
+  height: auto;            
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: block;         
+}
+
+/* hide scrollbar for WebKit browsers (optional aesthetic) */
+.movies-section::-webkit-scrollbar {
+  height: 8px;
+}
+.movies-section::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+}
+
+.movie-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  min-width: max-content;
+  align-items: flex-start; 
+  padding-top: 0;   
+  padding-bottom: 1.5rem;
+  scroll-behavior: smooth;
+
+  margin-top: 0; 
+
+}
+
+
+.movie-card {
+  flex: 0 0 190px;
+  background: #111827;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  height: 350px; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .movie-card img {
+  display: block;
   width: 100%;
   height: 270px;
   object-fit: cover;
+  margin: 0;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+
+  flex-shrink: 0;
+}
+
+/* Hover effect */
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* slight glow */
 }
 
 .movie-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: rgba(17, 24, 39, 0.95);
   padding: 0.8rem;
 }
 
 .movie-info h3 {
   font-size: 1rem;
   margin-bottom: 0.3rem;
+  line-height: 1.2;
+  height: 2.4em;              
+  overflow: hidden;           
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;      
+  -webkit-box-orient: vertical;
 }
 
 .movie-info p {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #bbb;
 }
 
-/* --- Placeholder Cards --- */
-.movie-placeholder {
-  width: 180px;
-  height: 270px;
-  background: #0f1629;
-  border-radius: 10px;
-  opacity: 0.3;
-}
-
-/* --- Movie Sections --- */
-.movies-section {
-  margin-bottom: 3rem;
-}
-
-.movies-section h2 {
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-}
-
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 3rem;
-}
-
+/* favorite button */
 .favorite-btn {
   position: absolute;
   top: 8px;
@@ -155,11 +234,16 @@ nav a:hover {
 .favorite-btn.active {
   color: red;
 }
-/* === FINAL FIX: make overlay results grid wrap properly === */
+
+
+
+
+
+/* SEARCH OVERLAY RESULTS */
 #overlayResults {
   display: grid !important;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-  gap: 1.5rem !important;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  gap: 1.2rem !important;
   justify-items: center !important;
   align-items: start !important;
   width: 100% !important;
@@ -167,7 +251,7 @@ nav a:hover {
 }
 
 #overlayResults .movie-card {
-  width: 180px;
+  width: 100%;
   background: #111827;
   border-radius: 10px;
   overflow: hidden;
@@ -185,17 +269,143 @@ nav a:hover {
   padding-right: 0.5rem;
 }
 
- .footer {
-  width: 100%;
-  height: 300px;
-  background-color: #0f1629;
-  color: #fff;
-  text-align: center;
-  padding: 20px 0;
-  position: relative; /* keeps it below the dashboard */
-  z-index: 1;
-  margin-top:-0.01vh;
+
+
+
+
+
+/* --- Vertical Scrollbar for Whole Discover Page --- */
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+/* Firefox support */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 
+
+
+
+/* --- Responsive Tweaks by breakpoints --- */
+/* Large desktops */
+@media (min-width: 1401px) {
+  .container {
+    padding: 0.5rem 1rem;
+  }
+  
+}
+
+/* Tablets */
+@media (max-width: 992px) {
+  .container {
+    padding: 0.5rem 1rem;
+  }
+
+  .highlight-section {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: center;
+    text-align: left;
+  }
+
+  .year {
+    margin: 0 auto;
+    font-size: clamp(4rem, 15vw, 10rem);
+  }
+
+  .highlight {
+    width: 100%;
+  }
+
+  .highlight-grid {
+    justify-content: flex-start;
+    gap: 1rem;
+  }
+}
+
+/* Small tablets / phones */
+@media (max-width: 600px) {
+  .highlight-section {
+    flex-direction:row;
+    gap: 1.5rem;
+  }
+
+  .highlight h2{
+    text-align: left;
+  }
+  .year {
+    font-size: clamp(3rem, 18vw, 8rem);
+  }
+
+  .highlight-grid .movie-card {
+    flex: 0 0 clamp(130px, 40vw, 160px);
+  }
+
+  .movie-card img {
+    height: 200px;
+  }
+  .movie-info h3 {
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 1.6rem 1rem;
+  }
+  .navbar {
+    padding: 0.9rem 1rem;
+  }
+
+  .highlight-section {
+    flex-direction:row;
+    gap: 1.5rem;
+  }
+
+  .highlight h2{
+    text-align: left;
+  }
+
+  .year {
+    font-size: clamp(2.6rem, 18vw, 7rem);
+    opacity: 0.45;
+    line-height: 0.9;
+  }
+  .movie-card img {
+    height: 200px;
+  }
+  .movie-info h3 {
+    font-size: 0.95rem;
+  }
+  nav a {
+    margin: 0 0.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Accessibility / small overflow guard */
+html, body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
 
