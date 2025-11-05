@@ -26,7 +26,6 @@ footer {
   margin-top: auto;
 }
 
-
 /* ====== INNER WRAPPER ====== */
 .footer-inner {
   width: 100%;
@@ -75,7 +74,6 @@ footer {
   flex-direction: column;
   gap: 0.3rem;
   text-align: justify;
-
   margin-top: 1%;
 }
 
@@ -117,17 +115,18 @@ footer {
   flex: 0 0 300px;
   display: flex;
   flex-direction: column;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .disclaimer-title {
   font-weight: 600;
   margin-bottom: 0.5rem;
   font-size: 1rem;
+  text-align: center;
 }
 
 .disclaimer-text {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   line-height: 1.5;
   color: var(--muted);
   text-align: justify;
@@ -140,8 +139,8 @@ footer {
 /* ====== ENSURE FOOTER STICKS TO BOTTOM ====== */
 html, body {
   height: 100%;
-  margin-top: 0%;
-  margin-bottom: 0%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -149,27 +148,69 @@ body {
   flex-direction: column;
 }
 
-/* ====== RESPONSIVE DESIGN ====== */
+/* ====== 💻 LAPTOP MEDIUM SCREENS (900px–1200px) ====== */
+@media (max-width: 1200px) {
+  footer {
+    padding: 2rem 3rem;
+  }
+
+  .footer-inner {
+    gap: 1.5rem;
+  }
+
+  .footer-left {
+    flex: 0 0 180px;
+  }
+
+  .footer-right {
+    flex: 0 0 250px;
+  }
+
+  .footer-paragraph {
+    font-size: 0.78rem;
+  }
+
+  .disclaimer-text {
+    font-size: 0.65rem;
+  }
+}
+
+/* ====== 📱 MOBILE & TABLET ====== */
 @media (max-width: 900px) {
   footer {
-    padding: 2rem 2rem;
+    padding: 1rem 1rem;
   }
 
   .footer-inner {
     flex-direction: column;
-    gap: 2rem;
+    display: flex;
+    align-items: flex-start;
   }
 
-  .footer-left,
-  .footer-right {
+  .footer-left,.footer-right {
+    width: 70%;
+    flex: none;
+    gap: inherit;
+    margin-bottom: 0%;
+    padding-bottom: 0%;
+  }
+
+  .footer-middle {
     width: 100%;
   }
 
   .footer-paragraph {
-    max-width: 100%;
+    font-size: 0.85rem;
   }
 
-  .footer-right .disclaimer-text {
+  .disclaimer-title {
+    text-align: left;
+    margin-top: 0%;
+  }
+
+  .disclaimer-text {
     width: 100%;
+    padding: 1rem 1.25rem;
+
   }
 }
