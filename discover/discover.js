@@ -1,8 +1,8 @@
 // --- Load navbar (unchanged) ---
-fetch("../nav-bar/nav.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("navbar-placeholder").innerHTML = data;
+  fetch("../nav-bar/nav.html")
+    .then((response) => response.text())
+    .then((data) => {
+      document.getElementById("navbar-placeholder").innerHTML = data;
   })
   .catch((error) => {
     console.error("Failed to load navbar:", error);
@@ -105,7 +105,6 @@ function addFavoriteButton(movie, container) {
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
   });
-
   container.appendChild(heart);
 }
 
@@ -166,7 +165,7 @@ function display2025Highlights(movies) {
 
   const movies2025 = movies
     .filter((movie) => movie.release_date && movie.release_date.startsWith("2025"))
-    .slice(0, 8);
+    .slice(0, 20);
 
   if (movies2025.length === 0) {
     highlightGrid.innerHTML = `<p>No 2025 movies found.</p>`;
@@ -182,7 +181,7 @@ function display2025Highlights(movies) {
 function displayActionMovies(movies) {
   if (!actionContainer) return;
   actionContainer.innerHTML = "";
-  movies.slice(0, 8).forEach((movie) => {
+  movies.slice(0, 20).forEach((movie) => {
     const card = createMovieCard(movie);
     actionContainer.appendChild(card);
   });
@@ -191,7 +190,7 @@ function displayActionMovies(movies) {
 function displayCartoonMovies(movies) {
   if (!cartoonContainer) return;
   cartoonContainer.innerHTML = "";
-  movies.slice(0, 8).forEach((movie) => {
+  movies.slice(0, 20).forEach((movie) => {
     const card = createMovieCard(movie);
     cartoonContainer.appendChild(card);
   });
@@ -229,6 +228,7 @@ fetch("https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US
       scrollLeft = track.scrollLeft;
       e.preventDefault();
     });
+
     window.addEventListener('mouseup', () => { isDown = false; track.classList.remove('dragging'); });
     track.addEventListener('mousemove', e => {
       if (!isDown) return;
@@ -236,6 +236,7 @@ fetch("https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US
       const walk = (x - startX) * 1.2; // scroll speed
       track.scrollLeft = scrollLeft - walk;
     });
+
     // touch support:
     track.addEventListener('touchstart', e => { startX = e.touches[0].pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
     track.addEventListener('touchmove', e => {
@@ -245,6 +246,8 @@ fetch("https://api.themoviedb.org/3/discover/movie?with_genres=16&language=en-US
     });
   });
 
+
+// --- Search Overlay Implementation --- //
 // --- Genre IDs ---
 const GENRE_IDS = {
   Action: 28,

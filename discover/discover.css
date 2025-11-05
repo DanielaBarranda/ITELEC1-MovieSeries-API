@@ -11,6 +11,8 @@ body {
   color: #fff;
   min-height: 100vh;
   padding-bottom: 40px;
+
+  transition: opacity 1s ease;
 }
 
 /* --- Layout --- */

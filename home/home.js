@@ -321,21 +321,28 @@ async function fetchMovies(genreId) {
   const data = await res.json();
   const list = data.results.slice(0, 7);
 
-  // ==== DISPLAY POSTERS ====
   const movieListContainer = document.getElementById("movie-list");
-  movieListContainer.innerHTML = list
-    .map(movie => `
-      <div class="movie-card">
-        <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
-        <p>${movie.title}</p>
-      </div>
-    `)
-    .join("");
+  movieListContainer.innerHTML = ""; // clear before adding
 
-  // ==== TEXT SUGGESTION (1-2 movie names) ====
-  if (list.length >= 2) {
+  // Create each card dynamically so we can attach click events
+  list.forEach((movie) => {
+    const card = document.createElement("div");
+    card.className = "movie-card";
+    card.innerHTML = `
+      <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
+      <p>${movie.title}</p>
+    `;
+
+    // ✅ make it clickable to preview.html
+    makeCardClickable(card, movie);
+
+    movieListContainer.appendChild(card);
+  });
+
+  // ==== Text suggestion (1–3 movie names) ====
+  if (list.length >= 3) {
     document.getElementById("movieNameSuggestions").innerHTML =
-      `Try <b>${list[0].title}</b>, <b>${list[1].title}</b>, or <b>${list[2].title}</b> today. </br> See more in our suggested movies below!`;
+      `Try <b>${list[0].title}</b>, <b>${list[1].title}</b>, or <b>${list[2].title}</b> today.<br>See more in our suggested movies below!`;
   }
 }
 
@@ -353,7 +360,7 @@ getWeatherAndMood();
 
 
 
-// ==================== MOVIE FACTS ====================
+// ==================== MOVIE FACTS ============================================= //
 async function getMovieFact() {
   const factText = document.getElementById("movieFact");
   factText.textContent = "Loading a fun fact... 🎥";
@@ -374,4 +381,18 @@ async function getMovieFact() {
 
 // Event listener
 document.getElementById("factBtn").addEventListener("click", getMovieFact);
+// ================================================================================= //
+
+
+
+
+
+// --- Clickable cards ---//
+function makeCardClickable(card, movie) {
+  card.addEventListener("click", (e) => {
+    if (e.target.classList && e.target.classList.contains("favorite-btn")) return;
+    window.location.href = `../preview/preview.html?movieID=${movie.id}`;
+  });
+}
+
 
