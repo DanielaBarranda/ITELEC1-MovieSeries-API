@@ -1,0 +1,304 @@
+@font-face {
+  font-family: "SF Pro";
+  src: url("../fonts/sf-pro-display/SFPRODISPLAYBOLD.OTF") format("truetype");
+}
+
+@font-face {
+  font-family: "SF Medium";
+  src: url("../fonts/sf-pro-display/SFPRODISPLAYMEDIUM.OTF") format("truetype");
+}
+
+@font-face {
+  font-family: "SF Light";
+  src: url("../fonts/sf-pro-display/SFPRODISPLAYLIGHT.OTF") format("truetype");
+}
+
+
+:root{
+  --nav-height: 72px;
+  --footer-height: 120px;
+}
+
+
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: white;
+
+  background-color: #000; 
+
+  font-family: "SF Light", sans-serif;
+  overflow-x: hidden;
+  display: block;
+}
+
+/* HERO Section t */
+.hero {
+  background-image: url("../images/moodbg1.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-color: #0b1236;
+  
+  height: calc(100vh - var(--nav-height));
+  width: 100vw; 
+  position:relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;
+  background: rgba(0,0,0,0.45);
+  padding: 0 1rem;
+}
+
+.container{
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
+
+.title {
+  font-size: 1.6rem;     
+  font-weight: 300;      
+  font-family: "SF Light", sans-serif;
+  margin-bottom: 0rem;
+}
+
+.subtitle {
+  font-size: 3.2rem;      
+  font-weight: 600;
+  font-family: "SF Pro", sans-serif;
+  color: #fff;
+  letter-spacing: 1.5px; 
+  
+  /* subtle neon white glow */
+  text-shadow: 
+    0 0 4px rgba(255, 255, 255, 0.6),
+    0 0 8px rgba(255, 255, 255, 0.4);
+
+  margin-bottom: 1.5rem;
+  max-width: 1000px;      
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+
+/* Mood Buttons */
+.mood-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-bottom: 1.5rem;
+}
+
+.mood-buttons button {
+  padding: 0.7rem 1.3rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;  
+  cursor: pointer;
+  transition: 0.2s ease;
+  color: #fff;
+}
+
+
+/* Button Themes */
+.mood-buttons button:nth-child(1) { background: #f4c542; }
+.mood-buttons button:nth-child(2) { background: #5b9bd5; }
+.mood-buttons button:nth-child(3) { background: #d9534f; }
+.mood-buttons button:nth-child(4) { background: #9b59b6; }
+.mood-buttons button:nth-child(5) { background: #e83e8c; }
+.mood-buttons button:nth-child(6) { background: #f39c12; }
+.mood-buttons button:nth-child(7) { background: #48c9b0; }
+
+.mood-buttons button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Movies Section */
+/* When movies are active, shrink hero content */
+.hero.shrink .title,
+.hero.shrink .subtitle,
+.hero.shrink .mood-buttons {
+  transform: scale(0.85);
+  opacity: 1;
+  margin-top: -10px; 
+  transition: 0.35s ease;
+}
+
+/* Movies Section */
+.movies-section {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: 0.35s ease;
+  background: none;         
+}
+
+.movies-section.active {
+  opacity: 1;
+  pointer-events: auto;
+  padding: 1rem 1.2rem;      
+  background: rgba(0, 0, 0, 0.38); 
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+  transform: translateY(0);
+  max-width: 700px;         
+}
+
+
+/* Make movie row stay inside box with consistent spacing */
+.movie-grid {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  overflow-y: visible !important; 
+  padding: 0.4rem 0.4rem 0.6rem;
+  scroll-snap-type: x mandatory;
+}
+
+.movie-grid::-webkit-scrollbar {
+  height: 8px;
+}
+.movie-grid::-webkit-scrollbar-thumb {
+  background: rgba(148, 148, 148, 0.45);
+  border-radius: 8px;
+}
+
+/* MOVIE CARD */
+.movie-card {
+  flex: 0 0 150px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(0,0,0,0.55);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.35s ease; /* smoother */
+  scroll-snap-align: start;
+  position: relative;
+
+}
+
+/* CARD HOVER — Bigger scale */
+.movie-card:hover {
+  transform: scale(1.05); /* Increase scale here */
+}
+
+/* DARK OVERLAY ON HOVER */
+.movie-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0);
+  transition: background 0.25s ease;
+  pointer-events: none;
+}
+
+.movie-card:hover::after {
+  background: rgba(0,0,0,0.35);
+}
+
+
+/* Text Section - match exact card background */
+.movie-info {
+  flex-grow: 1;              
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   
+  padding: 0.6rem;
+  background: rgba(0,0,0,0.55); 
+  text-align: center;
+}
+
+.movie-info h3 {
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+}
+
+.movie-info p {
+  font-size: 0.65rem;
+  margin: 0;
+}
+
+.movie-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.movie-card:hover img {
+  transform: scale(1.08);
+}
+
+/* Fade-in effect */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: yellow;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .title { font-size: 1.7rem; }
+  .subtitle { font-size: 1.1rem; }
+
+  .mood-buttons {
+    width: 90%;
+    gap: 10px;
+  }
+
+  .mood-buttons button {
+    flex: 1 1 45%;
+    font-size: 0.9rem;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .title { font-size: 1.4rem; }
+  .subtitle { font-size: 1rem; }
+
+  .mood-buttons button {
+    flex: 1 1 100%;
+  }
+}
