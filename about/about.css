@@ -6,18 +6,22 @@ body {
   font-weight: 500; /* Semi-Bold */
   margin: 0;
   padding: 0;
+  background: url("../images/aboutbg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  
 }
 
 .about-section {
   padding: 4rem 2rem;
- background: url("../images/aboutbg.jpg") no-repeat center center fixed; 
- opacity: 75%;
+   
+  opacity: 100%;
   background-size: cover;
   color: white;
   display: flex;
   justify-content: flex-start; 
   min-height: 100vh;
 }
+
 
 .about-container {
   display: flex;
@@ -33,14 +37,15 @@ body {
   flex-direction: column;
   align-items: flex-start;
   margin-top: 4%;
-  margin-bottom: 5rem;
+  margin-bottom: 2rem;
 }
 
 .about-logo-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  
 }
 
 .about-logo-header img {
@@ -68,8 +73,8 @@ body {
 }
 
 .about-content {
-  font-size: 1.1rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.5;
   text-align: right;
   margin-left: auto;
   max-width: 900px;
@@ -79,6 +84,7 @@ body {
   margin-bottom: 1.5rem;
   color: #e0e0e0;
   font-weight: 400;
+  text-align:justify ;
 }
 
 .about-content h2 {
@@ -87,6 +93,7 @@ body {
   margin-top: -0.5rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
+  text-align: left;
 }
 
 @media (max-width: 768px) {
@@ -113,88 +120,83 @@ body {
   }
 }
 
-/*Behind-the-Curtains*/
-.team-section { 
-  width: 100vw; 
-  margin-bottom: 0%;
-  padding: 15rem 2rem;
+/* ===== Team Section ===== */
+.team-section {
+  width: 100%;
+  padding: 3rem 2rem;
   background: linear-gradient(-180deg, #000000 0%, #0a213d 100%);
-  background-size: cover;
-  color: rgb(255, 255, 255);
+  color: white;
   text-align: left;
   box-sizing: border-box;
-  font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
-}
-
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #0b1623; /* match section bg just in case */
-  overflow-x: hidden; /* prevent horizontal scroll from 100vw */
-  font-family: 'SF Pro Display', sans-serif;
-  font-weight: 500;
 }
 
 .team-section h2 {
   margin-left: 5%;
-  font-size: 3.5rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
 }
 
 .team-section h2 span {
-  color: #b3e0ff;
+  color: #66c2ff;
 }
 
 .team-description {
   font-size: 1.1rem;
-  font-weight: 500;
-  color: #ffffff;
-  max-width: 800px;
+  font-weight: 400;
+  color: #f0f0f0;
+  max-width: 900px;
   margin-left: 5%;
   line-height: 1.6;
   margin-bottom: 2rem;
 }
 
-/* Centered and responsive team layout */
+/* 🎞️ Grid Layout: 3 cards per row on large screens */
 .team-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 900fr));
-  gap: 5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
   justify-items: center;
-  max-width: 1500px;
+  align-items: start;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
+/* 🎥 Team Card Design */
 .team-card {
-  margin-top: 90%;
-  background-color: #00000085;
+  background-color: rgba(0, 0, 0, 0.6);
   border-radius: 1rem;
-  padding: 2.5rem;
+  padding: 2rem;
   text-align: center;
-  width: 230px;
-  height: 280px;
+  width: 260px;
+  height: 320px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .team-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(3, 36, 105, 0.4);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(3, 36, 105, 0.4);
 }
 
-.avatar {
-  width: 80px;
-  height: 80px;
+.team-card .avatar {
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  background-color: #ccc;
-  margin: 0 auto 1rem auto;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+  border: 2px solid #66c2ff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.team-card .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .name {
   font-weight: 600;
+  font-size: 1.2rem;
   color: #fff;
   margin-bottom: 0.8rem;
 }
@@ -210,8 +212,93 @@ body {
   color: #66c2ff;
 }
 
-/*Avatar pfp*/
+/* ===== Responsiveness ===== */
 
+/* 💻 Laptop (medium screens) — 2 cards per row */
+@media (max-width: 1024px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .team-card {
+    width: 240px;
+    height: 300px;
+  }
+
+  .team-section h2 {
+    font-size: 2.5rem;
+  }
+}
+
+/* 📱 Tablet and Large Mobile — 2 per row, centered text */
+@media (max-width: 768px) {
+  .team-section {
+    text-align: center;
+    padding: 6rem 1.5rem;
+  }
+
+  .team-section h2 {
+    font-size: 2.2rem;
+    margin-left: 0;
+  }
+
+  .team-description {
+    margin: 0 auto 2rem;
+    font-size: 1rem;
+    max-width: 600px;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .team-card {
+    width: 220px;
+    height: 280px;
+    padding: 1.8rem;
+  }
+
+  .team-card .avatar {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+/* 📱 Small Mobile — 1 card per row */
+@media (max-width: 480px) {
+  .team-section {
+    padding: 5rem 1rem;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+
+  .team-card {
+    width: 90%;
+    max-width: 280px;
+    height: auto;
+    padding: 1.5rem;
+  }
+
+  .team-card .avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .name {
+    font-size: 1.1rem;
+  }
+
+  .socials a {
+    font-size: 1rem;
+  }
+}
+
+/*Avatar pfp*/
 .team-card .avatar {
   width: 120px;
   height: 120px;
@@ -240,8 +327,8 @@ body {
     url("../images/bg1.png") no-repeat center center fixed;
   background-size: contain, cover; /* filmstrip scales properly, bg covers */
   animation: moveFilm 30s linear infinite; /* smoother & slower movement */
-  opacity: 50; /* make it slightly more visible */
-  z-index: -1; /* keep it behind everything */
+  opacity: 20%; /* make it slightly more visible */
+  z-index: -1; 
 }
 
 /* 🎥 Horizontal film scroll effect */

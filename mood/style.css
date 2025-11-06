@@ -14,12 +14,6 @@
 }
 
 
-:root{
-  --nav-height: 72px;
-  --footer-height: 120px;
-}
-
-
 html, body{
   height: 100%;
   width: 100%;
