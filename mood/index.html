@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Mood. Your Movie.</title>
+  
+  <!-- CSS Links -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../nav-bar/nav-bar.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Navbar Placeholder -->
+  <div id="navbar-placeholder"></div>
+
+  <!-- Main Content -->
+  <section class="hero">        
+    <div class="overlay">        
+      <main class="container">
+        <h1 class="title">Your Mood. Your Movie.</h1>
+        <h2 class="subtitle">How Are You Feeling Today?</h2>
+
+        <div id="moodButtonsContainer" class="mood-buttons"></div>
+
+        <section class="movies-section" id="movieSection">
+          <div id="movieContainer" class="movie-grid"></div>
+        </section>
+      </main>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+
+  <!-- Scripts -->
+  <script src="../nav-bar/nav-bar.js"></script>
+  <script>
+    // Load navbar
+    fetch("../nav-bar/nav.html")
+      .then(res => res.text())
+      .then(data => document.getElementById("navbar-placeholder").innerHTML = data);
+  </script>
+
+  <script>
+    // After you inject nav & footer, compute heights and set CSS variables.
+    function updateLayoutVars() {
+      const nav = document.getElementById('navbar-placeholder');
+      const foot = document.getElementById('footer-placeholder');
+      // defaults if not present
+      const navH = nav ? nav.offsetHeight : parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72;
+      const footH = foot ? foot.offsetHeight : parseInt(getComputedStyle(document.documentElement).getPropertyValue('--footer-height')) || 120;
+
+      document.documentElement.style.setProperty('--nav-height', navH + 'px');
+      document.documentElement.style.setProperty('--footer-height', footH + 'px');
+
+      // adjust hero overlay vertical padding to ensure content not under navbar
+      const heroOverlay = document.querySelector('.hero .overlay');
+      if (heroOverlay) {
+        heroOverlay.style.paddingTop = (navH + 16) + 'px'; // 16px extra breathing room
+      }
+    }
+
+    // call after fetches
+    Promise.all([
+      fetch("../nav-bar/nav.html").then(r => r.text()).then(html => document.getElementById("navbar-placeholder").innerHTML = html),
+    ]).then(() => {
+      // small timeout to allow images/fonts to load and layout to settle
+      setTimeout(updateLayoutVars, 50);
+      // update if window resized (nav/footer may change height on wrap)
+      window.addEventListener('resize', updateLayoutVars);
+    }).catch(err => console.warn('nav/footer fetch error', err));
+  </script>
+
+</body>
+</html>

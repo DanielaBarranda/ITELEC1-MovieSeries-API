@@ -1,3 +1,5 @@
+
+
 // --- Show Mood Buttons ---
 const moodButtonsContainer = document.getElementById("moodButtonsContainer");
 const movieSection = document.getElementById("movieSection");
@@ -50,6 +52,10 @@ const moodToGenres = {
 async function suggestMoviesByMood(userMood) {
   movieSection.style.display = "block";
   movieSection.classList.add("active");
+
+  // NEW LINE ↓↓↓
+  document.querySelector(".hero").classList.add("shrink");
+
   movieContainer.innerHTML = "<p>Loading movies...</p>";
 
   const genreIds = moodToGenres[userMood] || [35];
@@ -61,7 +67,7 @@ async function suggestMoviesByMood(userMood) {
       TMDB_OPTIONS
     );
     const data = await res.json();
-    const shuffled = data.results.sort(() => 0.5 - Math.random()).slice(0, 7);
+    const shuffled = data.results.sort(() => 0.5 - Math.random()).slice(0, 20);
     displayMovies(shuffled);
   } catch (err) {
     console.error(err);
