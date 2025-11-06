@@ -1,8 +1,7 @@
 // ==================== SEARCH OVERLAY FUNCTIONALITY ====================
-
 // --- TMDB token (same as discover.js) ---
-const token = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
-
+const token =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
 const options = {
   method: "GET",
   headers: {
@@ -25,70 +24,75 @@ function injectOverlayStyles() {
   const style = document.createElement("style");
   style.id = "search-overlay-styles";
   style.innerHTML = `
-    .search-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(10,11,12,0.96);
-      backdrop-filter: blur(6px);
-      padding: 2.5rem 6rem;
-      z-index: 3000;
-      display: none;
-      color: #fff;
-      overflow-y: auto;
-    }
-    .search-overlay.open { display: block; animation: fadeIn 180ms ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(-6px);} to { opacity: 1; transform: translateY(0);} }
-    .search-overlay input[type="text"] {
-      flex: 1; padding: 0.8rem 1rem; border-radius: 999px;
-      border: none; outline: none; background: #1f1f1f; color: #fff;
-    }
-    .search-overlay .search-cta {
-      background:#fff; color:#000; border-radius: 999px; padding:0.6rem 0.9rem;
-      cursor:pointer; font-weight:600;
-    }
-    .search-overlay .genres { display:flex; gap:1.2rem; margin-bottom:1.2rem; flex-wrap:wrap; }
-    .search-overlay .genre {
-      background: transparent; border: 1px solid rgba(255,255,255,0.12);
-      padding:0.45rem 0.75rem; border-radius:6px; cursor:pointer; color:#ddd;
-    }
-    .search-overlay .genre.active {
-      background: rgba(255,255,255,0.12); color:#fff;
-    }
-    .search-overlay .close-overlay {
-      position:absolute; right:1.5rem; top:1rem;
-      background:transparent; border:none; color:#fff;
-      font-size:1.4rem; cursor:pointer;
-    }
-    #overlayResults {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.5rem;
-      justify-items: center;
-      align-items: start;
-      width: 100%;
-    }
-  `;
+.search-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10,11,12,0.96);
+  backdrop-filter: blur(6px);
+  padding: 2.5rem 6rem;
+  z-index: 3000;
+  display: none;
+  color: #fff;
+  overflow-y: auto;
+}
+.search-overlay.open { display: block; animation: fadeIn 180ms ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-6px);} to { opacity: 1; transform: translateY(0);} }
+.search-overlay input[type="text"] {
+  flex: 1; padding: 0.8rem 1rem; border-radius: 999px;
+  border: none; outline: none; background: #1f1f1f; color: #fff;
+}
+.search-overlay .search-cta {
+  background:#fff; color:#000; border-radius: 999px; padding:0.6rem 0.9rem;
+  cursor:pointer; font-weight:600;
+}
+.search-overlay .genres { display:flex; gap:1.2rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+.search-overlay .genre {
+  background: transparent; border: 1px solid rgba(255,255,255,0.12);
+  padding:0.45rem 0.75rem; border-radius:6px; cursor:pointer; color:#ddd;
+}
+.search-overlay .genre.active {
+  background: rgba(255,255,255,0.12); color:#fff;
+}
+.search-overlay .close-overlay {
+  position:absolute; right:1.5rem; top:1rem;
+  background:transparent; border:none; color:#fff;
+  font-size:1.4rem; cursor:pointer;
+}
+#overlayResults {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  justify-items: center;
+  align-items: start;
+  width: 100%;
+}
+`;
   document.head.appendChild(style);
 }
 
 // --- Create Search Overlay ---
 function createSearchOverlay() {
-  if (document.querySelector(".search-overlay")) return document.querySelector(".search-overlay");
+  if (document.querySelector(".search-overlay"))
+    return document.querySelector(".search-overlay");
+
   injectOverlayStyles();
+
   const overlay = document.createElement("div");
   overlay.className = "search-overlay";
   overlay.innerHTML = `
-    <div class="search-panel">
-      <button class="close-overlay">✕</button>
-      <div class="search-row" style="display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;">
-        <input type="text" id="overlaySearchInput" placeholder="Search movies..." autocomplete="off" />
-        <button class="search-cta" id="overlaySearchBtn">Search</button>
-      </div>
-      <div class="genres" id="overlayGenres"></div>
-      <div class="results"><div id="overlayResults"></div></div>
-    </div>
-  `;
+<div class="search-panel">
+  <button class="close-overlay">✕</button>
+  <div class="search-row" style="display:flex;gap:1rem;align-items:center;margin-bottom:1.2rem;">
+    <input type="text" id="overlaySearchInput" placeholder="Search movies..." autocomplete="off" />
+    <button class="search-cta" id="overlaySearchBtn">Search</button>
+  </div>
+  <div class="genres" id="overlayGenres"></div>
+  <div class="results"><div id="overlayResults"></div></div>
+</div>
+`;
+
   document.body.appendChild(overlay);
+
   const overlayGenres = overlay.querySelector("#overlayGenres");
   ["Action", "Fantasy", "Horror", "Science Fiction"].forEach((g) => {
     const btn = document.createElement("button");
@@ -97,6 +101,7 @@ function createSearchOverlay() {
     btn.dataset.genre = g;
     overlayGenres.appendChild(btn);
   });
+
   return overlay;
 }
 
@@ -114,6 +119,7 @@ function setupOverlayBehavior() {
       overlayResults.innerHTML = "<p>Type to search movies or choose a genre.</p>";
       return;
     }
+
     overlayResults.innerHTML = `<p>Loading results for "${query}"...</p>`;
     fetch(`https://api.themoviedb.org/3/search/movie?query=${encodeURIComponent(query)}`, options)
       .then(res => res.json())
@@ -128,10 +134,10 @@ function setupOverlayBehavior() {
             ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
             : "https://via.placeholder.com/500x750?text=No+Image";
           overlayResults.innerHTML += `
-            <div class="movie-card">
-              <img src="${img}" alt="${movie.title}" style="width:100%;border-radius:10px;">
-              <p>${movie.title}</p>
-            </div>`;
+<div class="movie-card">
+  <img src="${img}" alt="${movie.title}" style="width:100%;border-radius:10px;">
+  <p>${movie.title}</p>
+</div>`;
         });
       });
   }
@@ -140,8 +146,10 @@ function setupOverlayBehavior() {
   genresContainer.addEventListener("click", (e) => {
     const btn = e.target.closest(".genre");
     if (!btn) return;
+
     genresContainer.querySelectorAll(".genre").forEach(g => g.classList.remove("active"));
     btn.classList.add("active");
+
     const id = GENRE_IDS[btn.dataset.genre];
     if (id) {
       overlayResults.innerHTML = `<p>Loading ${btn.dataset.genre} movies...</p>`;
@@ -154,10 +162,10 @@ function setupOverlayBehavior() {
               ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
               : "https://via.placeholder.com/500x750?text=No+Image";
             overlayResults.innerHTML += `
-              <div class="movie-card">
-                <img src="${img}" alt="${movie.title}" style="width:100%;border-radius:10px;">
-                <p>${movie.title}</p>
-              </div>`;
+<div class="movie-card">
+  <img src="${img}" alt="${movie.title}" style="width:100%;border-radius:10px;">
+  <p>${movie.title}</p>
+</div>`;
           });
         });
     }
@@ -202,8 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 150);
 });
 
-
-
 // ==================== NAVBAR (SAME AS DISCOVER) ====================
 fetch("../nav-bar/nav.html")
   .then(response => response.text())
@@ -226,14 +232,12 @@ const navbarCheck = setInterval(() => {
   const navbar = document.querySelector(".navbar");
   if (navbar) {
     clearInterval(navbarCheck);
-
     // When arrow is clicked (landing slides up)
     arrow.addEventListener("click", () => {
       setTimeout(() => {
         navbar.classList.add("visible");
       }, 800); // Delay until landing finishes sliding up
     });
-
     // If user scrolls down manually, also show it
     window.addEventListener("scroll", () => {
       const scrollY = window.scrollY;
@@ -246,11 +250,10 @@ const navbarCheck = setInterval(() => {
   }
 }, 200);
 
-
-
 // ==================== WEATHER + MOVIE MOOD ====================
 const WEATHER_API_KEY = "3e5a7eb1fa9e9597753931bac70bc76f";
-const TMDB_JWT = "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
+const TMDB_JWT =
+  "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJkMjA5YTIzMzJhNmNhMDBiZTlhZmU3ZDE1OTFlOTQ3ZCIsIm5iZiI6MTc2MTU0NzI0MS44MjcwMDAxLCJzdWIiOiI2OGZmMTNlOTE1NjE4ZjAzOThkYTAyMjAiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.7BrLe9Tt81ZEIg2T0zV8elagGYC78noCauoVOJIMJHE";
 
 // TMDB Genre Map
 const GENRES = {
@@ -258,19 +261,17 @@ const GENRES = {
   adventure: "12",
   drama: "18",
   comedy: "35",
-  popular: "28" 
+  popular: "28",
 };
 
 async function getWeatherAndMood() {
   navigator.geolocation.getCurrentPosition(async position => {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
-
     const weatherRes = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`
     );
     const weather = await weatherRes.json();
-
     const temp = Math.round(weather.main.temp);
     const condition = weather.weather[0].main.toLowerCase();
     const icon = weather.weather[0].icon;
@@ -281,6 +282,29 @@ async function getWeatherAndMood() {
     document.getElementById("weatherLocation").textContent = city;
     document.getElementById("weatherIcon").src =
       `https://openweathermap.org/img/wn/${icon}@2x.png`;
+
+    // --- DYNAMIC BACKGROUND IMAGE BASED ON WEATHER ---
+    const weatherContainer = document.getElementById("weatherContainer");
+    let bgImage = "";
+
+    if (condition.includes("rain")) {
+      bgImage = "url('../images/rainy.jpg')";
+    } else if (condition.includes("cloud")) {
+      bgImage = "url('../images/cloudy.jpg')";
+    } else if (condition.includes("clear")) {
+      bgImage = "url('../images/sunny.jpg')";
+    } else if (condition.includes("snow")) {
+      bgImage = "url('../images/snow.jpg')";
+    } else {
+      bgImage = "url('../images/default-bg.jpg')";
+    }
+
+    if (weatherContainer) {
+      weatherContainer.style.backgroundImage = bgImage;
+      weatherContainer.style.backgroundSize = "cover";
+      weatherContainer.style.backgroundPosition = "center";
+      weatherContainer.style.transition = "background-image 0.8s ease-in-out";
+    }
 
     // RIGHT SIDE MOOD TEXT & GENRE
     let moodSuggestion = "";
@@ -307,7 +331,6 @@ async function getWeatherAndMood() {
     }
 
     document.getElementById("moodDescription").textContent = moodSuggestion;
-
     fetchMovies(GENRES[genre]);
   });
 }
@@ -317,10 +340,8 @@ async function fetchMovies(genreId) {
     `https://api.themoviedb.org/3/discover/movie?include_adult=false&sort_by=popularity.desc&with_genres=${genreId}`,
     { headers: { Authorization: `Bearer ${TMDB_JWT}` } }
   );
-
   const data = await res.json();
-  const list = data.results.slice(0, 7);
-
+  const list = data.results.slice(0, 20);
   const movieListContainer = document.getElementById("movie-list");
   movieListContainer.innerHTML = ""; // clear before adding
 
@@ -329,13 +350,11 @@ async function fetchMovies(genreId) {
     const card = document.createElement("div");
     card.className = "movie-card";
     card.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
-      <p>${movie.title}</p>
-    `;
-
+<img src="https://image.tmdb.org/t/p/w300${movie.poster_path}" alt="${movie.title}">
+<p>${movie.title}</p>
+`;
     // ✅ make it clickable to preview.html
     makeCardClickable(card, movie);
-
     movieListContainer.appendChild(card);
   });
 
@@ -351,14 +370,10 @@ document.getElementById("refreshMoodBtn").onclick = getWeatherAndMood;
 
 // "See More" button → Discover
 document.getElementById("seeMoreBtn").onclick = () =>
-  window.location.href = "../discover/discover.html";
+  (window.location.href = "../discover/discover.html");
 
 // Load at start
 getWeatherAndMood();
-
-
-
-
 
 // ==================== MOVIE FACTS ============================================= //
 async function getMovieFact() {
@@ -381,12 +396,8 @@ async function getMovieFact() {
 
 // Event listener
 document.getElementById("factBtn").addEventListener("click", getMovieFact);
+
 // ================================================================================= //
-
-
-
-
-
 // --- Clickable cards ---//
 function makeCardClickable(card, movie) {
   card.addEventListener("click", (e) => {
@@ -394,5 +405,3 @@ function makeCardClickable(card, movie) {
     window.location.href = `../preview/preview.html?movieID=${movie.id}`;
   });
 }
-
-
