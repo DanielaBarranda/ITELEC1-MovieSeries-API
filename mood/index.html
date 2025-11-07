@@ -27,9 +27,16 @@
         <section class="movies-section" id="movieSection">
           <div id="movieContainer" class="movie-grid"></div>
         </section>
+      <!-- Search Results Section (Hidden by Default) -->
+        <section id="searchResultsSection" class="movies-section" style="display: none;">
+          <h2>Search Results</h2>
+          <div id="searchResultsContainer" class="movie-grid"></div>
+        </section>
       </main>
     </div>
   </section>
+
+
 
   <script src="script.js"></script>
 
@@ -66,5 +73,6 @@
     }).catch(err => console.warn('nav/footer fetch error', err));
   </script>
 
+  
 </body>
 </html>
