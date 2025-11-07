@@ -28,6 +28,49 @@ html, body{
   display: block;
 }
 
+/* SEARCH OVERLAY RESULTS */
+#overlayResults {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)) !important;
+  gap: 1.2rem !important;
+  justify-items: center !important;
+  align-items: start !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+#overlayResults .movie-card {
+  width: 100%;
+  background: #111827;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+#overlayResults .movie-card:hover {
+  transform: scale(1.05);
+}
+
+.search-overlay .results {
+  margin-top: 1.5rem;
+  max-height: 70vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 10; /* ensure it’s above the overlay */
+  color: white; /* or any color you want */
+  text-shadow: 0 0 4px black; /* better visibility */
+}
+
 /* HERO Section t */
 .hero {
   background-image: url("../images/moodbg1.png");
