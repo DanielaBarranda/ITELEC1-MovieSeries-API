@@ -112,63 +112,91 @@ main, section {
   background-color: #003be1;
 }
 
+/* ===== NAV RIGHT (search + hamburger grouped) ===== */
+.nav-right {
+  position: absolute;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 /* ===== HAMBURGER MENU (HIDDEN ON DESKTOP) ===== */
 .hamburger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   cursor: pointer;
-  position: absolute;
-  right: 2rem;
+  background: none;
+  border: none;
+  padding: 4px;
   z-index: 1100;
 }
 
 .hamburger span {
-  width: 25px;
-  height: 3px;
+  display: block;
+  width: 24px;
+  height: 2.5px;
   background: white;
   margin: 4px 0;
+  border-radius: 2px;
   transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
 }
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
 
-/* RESPONSIVE (MOBILE) */
 @media (max-width: 1000px) {
   .nav-links {
     gap: 1rem;
     font-size: 0.9rem;
   }
-
-  .logo{
-    gap: 0.3rem;
-  }
-  
-  .logo img {
-      width: 20px;
-      height: 20px;
-  } 
-  .logo a {
-      color: white;
-      font-size: 1.2rem;
-      text-decoration: none;
-      padding: 0rem;
-  }
-  .search-container {
-    position: absolute;
-   
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
-  }
+  .logo { gap: 0.3rem; }
+  .logo img { width: 20px; height: 20px; }
+  .logo a { font-size: 1.1rem; }
 }
 
-@media (max-width: 600px) {
-    .nav-links {
-      gap: 0rem;
-      font-size: 0.9rem;
-      margin-left: 4rem;
-    }
+@media (max-width: 700px) {
+  .hamburger {
+    display: flex;
+  }
 
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.97);
+    padding: 1.5rem 0;
+    gap: 0;
+    z-index: 999;
+    text-align: center;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links li a {
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .search-container {
+    position: static;
+  }
 }
 
