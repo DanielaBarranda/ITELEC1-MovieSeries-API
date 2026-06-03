@@ -335,7 +335,15 @@ html, body{
   .title { font-size: 1.4rem; }
   .subtitle { font-size: 1rem; }
 
+  .mood-buttons {
+    width: 95%;
+    gap: 0.5rem;
+  }
+
   .mood-buttons button {
-    flex: 1 1 100%;
+    flex: 1 1 calc(50% - 0.5rem);
+    font-size: 0.95rem;
+    padding: 12px 0;
+    border-radius: 25px;
   }
 }

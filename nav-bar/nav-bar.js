@@ -1,19 +1,8 @@
-
-// Navbar ID
-/*fetch("/ITELEC1-MovieSeries-API")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("navbar-placeholder").innerHTML = data;
-  })
-  .catch((error) => {
-    console.error("Failed to load navbar:", error);
-  });
-
-/* Insert nyo to sa html nyo:
-
-<link rel="stylesheet" href="/ITELEC1-MovieSeries-API/nav-bar/nav-bar.css" />
-
-<!-- Navbar -->
-  <div id="navbar-placeholder"></div>
-
-*/
+// Hamburger menu toggle — uses event delegation so it works after async navbar injection
+document.addEventListener("click", function (e) {
+  const btn = e.target.closest("#hamburger");
+  if (!btn) return;
+  const links = document.getElementById("navLinks");
+  if (links) links.classList.toggle("open");
+  btn.classList.toggle("active");
+});
