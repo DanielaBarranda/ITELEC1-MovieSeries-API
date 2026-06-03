@@ -294,9 +294,9 @@ async function getWeatherAndMood() {
     } else if (condition.includes("clear")) {
       bgImage = "url('../images/sunny.jpg')";
     } else if (condition.includes("snow")) {
-      bgImage = "url('../images/snow.jpg')";
+      bgImage = "url('../images/snowy.jpg')";
     } else {
-      bgImage = "url('../images/default-bg.jpg')";
+      bgImage = "url('../images/homebg1.jpg')";
     }
 
     if (weatherContainer) {
