@@ -309,6 +309,13 @@ html, body{
   color: yellow;
 }
 
+/* Hide search button on mobile — hamburger is enough on this page */
+@media (max-width: 700px) {
+  .search-container {
+    display: none;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero {
