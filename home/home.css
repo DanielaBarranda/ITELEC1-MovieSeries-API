@@ -785,6 +785,19 @@ body {
   .logo { width: 70px; }
 }
 
+@media (max-width: 768px) {
+  .title { font-size: 3.5rem; }
+  .Llogo { width: 55px; }
+  .subtitle { font-size: 1rem; }
+  .Llogo-container { gap: 8px; }
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 2.8rem; }
+  .Llogo { width: 44px; }
+  .subtitle { font-size: 0.9rem; }
+}
+
 @media (max-width: 1024px) {
   .dashboard-content { flex-direction: column; }
   .dashboard-info, .dashboard-data { flex: 1 1 100%; }
